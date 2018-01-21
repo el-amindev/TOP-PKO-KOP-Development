@@ -163,3 +163,7 @@ wolah
 
 
 then u add it to ur item info... 
+
+
+**Credits**
+Chino@PkoDev
