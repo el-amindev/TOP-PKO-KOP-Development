@@ -1,0 +1,1 @@
+//spawnid	startpos	endpos	direction	monsterID	count	Rfprobability	RFTime	commotion	note	Region ID
