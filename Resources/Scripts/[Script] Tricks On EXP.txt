@@ -1,0 +1,169 @@
+Here are some tricks that i've been using.
+
+1.Remove exp in certain maps.
+-open exp_and_lv.lua
+-Search for this
+
+---------------------
+
+                        exp_up = exp_up * EXP_RAID_STATE
+                        if Lv ( TurnToCha(t[i]) ) >= 80 then 
+                                exp_up = math.floor ( exp_up / 50 ) 
+                        end
+
+
+---------------------
+
+
+Under this piece, we will add our script.
+
+
+---------------------
+
+
+                        local MapName = GetChaMapName(TurnToCha(t[i]))
+                        if MapName == "ournamname" or MapName == "abandonedcity" then
+                                exp_up = 0
+                        end
+
+
+---------------------
+
+
+-notice: abandonedcity = forsakencity...
+you can add any maps u want.
+
+2.Gain gold each monster killed.
+-again, open exp_and_lv.lua
+-under this:
+
+
+---------------------
+
+
+                        exp_up = exp_up * EXP_RAID_STATE
+                        if Lv ( TurnToCha(t[i]) ) >= 80 then 
+                                exp_up = math.floor ( exp_up / 50 ) 
+                        end
+
+
+---------------------
+
+
+we put our code:
+
+
+---------------------
+
+                        local Money = {}
+                                Money[1] = 500
+                                Money[2] = 700
+                                Money[3] = 1500
+                                Money[4] = 5000
+                                
+                        local i = math.random(1 , 4)
+                                AddMoney ( t[i] , 0 , Money[i] )
+
+
+---------------------
+notice: 500,700,1500,5000 are money values
+
+
+3.Level exp
+-most used for under or over level rates:
+-For example, all under level 75 to have 3x exp
+-again, open exp_and_lv.lua
+-under this:
+
+
+-----------------------
+
+                        exp_up = exp_up * EXP_RAID_STATE
+                        if Lv ( TurnToCha(t[i]) ) >= 80 then 
+                                exp_up = math.floor ( exp_up / 50 ) 
+                        end
+
+
+-----------------------
+
+we put our code:
+
+----------------------
+
+
+                        local Level = Lv(TurnToCha(t[i]))
+                        if Level <= 75 then
+                                exp_up *= 3
+                        end
+
+
+------------------------
+
+
+
+notice exp_up *= 3, means exp = exp * 3 (tripple rate)
+
+4.Level 79 EXP FIX
+-again, open exp_and_lv.lua
+-under this:
+
+
+--------------------------
+
+
+                        exp_up = exp_up * EXP_RAID_STATE
+                        if Lv ( TurnToCha(t[i]) ) >= 80 then 
+                                exp_up = math.floor ( exp_up / 50 ) 
+                        end
+
+
+
+--------------------------
+
+
+we put our code:
+
+
+-------------------------
+
+
+                        local CheckLevelSeventyNine = CheckLevelSeventyNine( TurnToCha(t[i]) )
+                        if CheckLevelSeventyNine == true then
+                                exp_up = exp_up / 50
+                        end
+
+
+---------------------------
+
+
+and heres the other needed function.
+put it in addhelpnpc.lua
+
+
+
+----------------------------------
+
+
+        function CheckLevelSeventyNine( role )
+        
+                local Level = Lv(role)
+                if Level == 79 then
+                        local EXP = GetChaAttr( role, ATTR_CEXP)
+                
+                        if EXP >= 2291634902 then
+                                return true
+                        else
+                                return false
+                        end
+                else
+                        return false
+                end
+        end
+
+
+
+------------------------------------
+
+
+credits to Lemon
+

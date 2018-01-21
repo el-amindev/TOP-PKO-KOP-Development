@@ -1,0 +1,43 @@
+local Dina_xl = GetEquipItemP(role,8)
+local Dina_xl_ID = GetItemID (Dina_xl)
+local Dina_x2 = GetEquipItemP(role,2)
+local Dina_x2_ID = GetItemID (Dina_x2)
+local Dina_x2_Fusion_ID = GetItemAttr(Dina_x2,ITEMATTR_VAL_FUSIONID)
+if Dina_xl_ID == 2577 and Dina_x2_ID == 2817 or Dina_x2_Fusion_ID == 2817 then
+AddState ( role , role , STATE_BBRING1 , 1 , 3600 )
+elseif Dina_xl_ID == 2578 and Dina_x2_ID == 2820 or Dina_x2_Fusion_ID == 2820 then
+AddState ( role , role , STATE_BBRING2 , 1 , 3600 )
+elseif Dina_xl_ID == 2579 and Dina_x2_ID == 2823 or Dina_x2_Fusion_ID == 2823 then
+AddState ( role , role , STATE_BBRING3 , 1 , 3600 )
+elseif Dina_xl_ID == 2580 and Dina_x2_ID == 2826 or Dina_x2_Fusion_ID == 2826 then
+AddState ( role , role , STATE_BBRING4 , 1 , 3600 )
+elseif Dina_xl_ID == 2581 and Dina_x2_ID == 2832 or Dina_x2_Fusion_ID == 2832 then
+AddState ( role , role , STATE_BBRING5 , 1 , 3600 )
+elseif Dina_xl_ID == 2582 and Dina_x2_ID == 2829 or Dina_x2_Fusion_ID == 2829 then
+AddState ( role , role , STATE_BBRING6 , 1 , 3600 )
+else
+local statelv_bbring1 = GetChaStateLv ( role , STATE_BBRING1 )
+if statelv_bbring1~=0 then
+RemoveState ( role , STATE_BBRING1 )
+end
+local statelv_bbring2 = GetChaStateLv ( role , STATE_BBRING2 )
+if statelv_bbring2~=0 then
+RemoveState ( role , STATE_BBRING2 )
+end
+local statelv_bbring3 = GetChaStateLv ( role , STATE_BBRING3 )
+if statelv_bbring3~=0 then
+RemoveState ( role , STATE_BBRING3 )
+end
+local statelv_bbring4 = GetChaStateLv ( role , STATE_BBRING4 )
+if statelv_bbring4~=0 then
+RemoveState ( role , STATE_BBRING4 )
+end
+local statelv_bbring5 = GetChaStateLv ( role , STATE_BBRING5 )
+if statelv_bbring5~=0 then
+RemoveState ( role , STATE_BBRING5 )
+end
+local statelv_bbring6 = GetChaStateLv ( role , STATE_BBRING6 )
+if statelv_bbring6~=0 then
+RemoveState ( role , STATE_BBRING6 )
+end
+end

@@ -1,0 +1,33 @@
+7000	Buff Ticket	n1481	10130001	0	0	0	0	0	00	31	0	0	0	0	0	1	1	1	1	99	0	200	-1	0	-1 0 0 -1 -1 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_buffticket 0 0 0 0 0 0 Double click to get all buffs in 5 minutes.
+
+
+itemeffect.lua
+
+function ItemUse_buffticket( role , Item )
+local Cha_Boat = GetCtrlBoat(role)
+if Cha_Boat ~= nil then
+SystemNotice(role , "Not usable on the sea." )
+UseItemFailed (role)
+return
+end
+local buff1 = GetChaStateLv(role,STATE_SHPF)
+local buff2 = GetChaStateLv(role,STATE_XLZH)
+local buff3 = GetChaStateLv(role,STATE_TSHD)
+local buff4 = GetChaStateLv(role,STATE_FZLZ)
+local buff5 = GetChaStateLv(role,STATE_MLCH)
+if buff1 >= 1 or buff2 >= 1 or buff3 >= 1 or buff4 >= 1 or buff5 >= 1 then
+SystemNotice(role,"Only you can use this ticket after duration of buffs end.")
+UseItemFailed(role)
+return
+end
+local del_item = DelBagItem( role , 7000 , 1 )
+if del_item == 1 then
+AddState ( role , role , STATE_SHPF  , 10 , 600 )
+AddState ( role , role , STATE_XLZH  , 10 , 600 )
+AddState ( role , role , STATE_TSHD  , 10 , 600 )
+AddState ( role , role , STATE_FZLZ  , 10 , 600 )
+AddState ( role , role , STATE_MLCH  , 10 , 600 )
+BickerNotice( role , "You recived Harden, Spiritual Fire, Tempest Bolt, Angelic Shield, Intense Magic for 5 minutes!" )
+end
+ 
+end

@@ -1,0 +1,285 @@
+function ItemUse_MHDTZ( role , Item ) 							
+ 	local Item_CanGet = GetChaFreeBagGridNum ( role )
+	 if Item_CanGet < 1 then
+		SystemNotice(role ,"To open Blurry Blueprint requires at least 1 empty inventory slot")
+		UseItemFailed ( role )
+		return
+	end  	
+	local r1 = 0
+	local r2 = 0
+	local item_ID=GetItemID(Item)
+	local Itemnew_ID=2300
+	local rad_ID=math.random ( 1, 100 )
+	if rad_ID<=40 then
+		Itemnew_ID=2300
+	elseif rad_ID>=41 and rad_ID<=81 then
+		Itemnew_ID=2302
+	else
+		Itemnew_ID=2301
+	end
+	r1, r2 = MakeItem ( role , Itemnew_ID  , 1 , 4 )
+	local Itemnew = GetChaItem ( role , 2 , r2 )
+
+
+	local rad_energy=math.random ( 1, 100 )
+	local energy = 1
+	if item_ID==1000 then
+		energy=1
+	elseif item_ID==1001 then
+		if rad_energy<=5 then
+			energy=4
+		elseif  rad_energy<=30 and rad_energy>=6 then
+			energy=3
+		else
+			energy=2
+		end
+	elseif item_ID==1002 then
+		if rad_energy<=5 then
+			energy=6
+		elseif  rad_energy<=30 and rad_energy>=6 then
+			energy=5
+		else
+			energy=4
+		end
+	elseif item_ID==1003 then
+		if rad_energy<=5 and Itemnew_ID~=2301 then
+			energy=8
+		elseif  rad_energy<=30 and rad_energy>=6 then
+			energy=7
+		else
+			energy=6
+		end
+	end	
+	
+	local final_ID=1849
+	local final_LV=20
+	local final_ID1=3116
+	local final_ID2=3116
+	local final_ID3=3116
+	
+	local General = 0  
+	local ItemId =3124
+	if Itemnew_ID==2300 then
+		local STAR_BEGIN=ZHIZAO_Mxcount*(energy-1)/10+1
+		local STAR_END=ZHIZAO_Mxcount*energy/10
+	
+		for i = STAR_BEGIN , STAR_END , 1 do 
+		    General = ZHIZAO__Rad[ i ] + General		
+		end 
+		local a = math.random ( 1, General )
+		local b = 0
+		local d = 0 
+		local k = 0 
+		local c = -1
+		for k = STAR_BEGIN , STAR_END , 1 do
+			d = ZHIZAO__Rad[ k ] + b
+			if a <= d and a > b then
+				c = k
+				break 
+			end 
+			b = d 
+		end 
+		if c == -1 then
+			c =STAR_BEGIN
+		end
+
+		final_ID=ZHIZAO_ID[c]
+		final_LV=ZHIZAO_LV[c]
+		final_ID1=ZHIZAO_ID1[c]
+		final_ID2=ZHIZAO_ID2[c]
+		final_ID3=ZHIZAO_ID3[c]
+
+	end
+
+	if Itemnew_ID==2301 then
+		local STAR_BEGIN=1
+		local STAR_END=77
+		if energy==1 then
+			STAR_BEGIN=1
+			STAR_END=77
+		elseif energy==2 then
+			STAR_BEGIN=78
+			STAR_END=166
+		elseif energy==3 then
+			STAR_BEGIN=167
+			STAR_END=278
+		elseif energy==4 then
+			STAR_BEGIN=279
+			STAR_END=434
+		elseif energy==5 then
+			STAR_BEGIN=435
+			STAR_END=596
+		elseif energy==6 then
+			STAR_BEGIN=597
+			STAR_END=732
+		elseif energy==7 then
+			STAR_BEGIN=733
+			STAR_END=871
+		elseif energy==8 then
+			STAR_BEGIN=895
+			STAR_END=902
+		end
+		
+		for i = STAR_BEGIN , STAR_END , 1 do 
+		    General = ZHUZAO__Rad[ i ] + General		
+		end 
+		local a = math.random ( 1, General )
+		local b = 0
+		local d = 0 
+		local k = 0 
+		local c = -1
+		for k = STAR_BEGIN , STAR_END , 1 do
+			d = ZHUZAO__Rad[ k ] + b
+			if a <= d and a > b then
+				c = k
+				break 
+				end 
+			b = d 
+		end 
+		if c == -1 then
+			c =STAR_BEGIN
+		end
+		
+		final_ID=ZHUZAO_ID[c]
+		final_LV=ZHUZAO_LV[c]
+		final_ID1=ZHUZAO_ID1[c]
+		final_ID2=ZHUZAO_ID2[c]
+		final_ID3=ZHUZAO_ID3[c]		
+		local final_type=GetItemType2(final_ID)
+		local check=0
+		local i = 0
+		for i = 0 , Item_CanJinglian_Num  , 1 do
+			if final_type == Item_CanJinglian_ID [i] then
+				check=1
+			end
+		end
+
+		if  check==1 then
+			local check_rad=math.random ( 1, 1000 )
+			if check_rad==1 then
+				final_LV=70
+			elseif check_rad>=2 and check_rad<=11 then
+				final_LV=60
+			elseif check_rad>=12 and check_rad<=21 then
+				final_LV=50
+			elseif check_rad>=22 and check_rad<=221 then
+				final_LV=40
+			elseif check_rad>=222 and check_rad<=421 then
+				final_LV=30
+			elseif check_rad>=422 and check_rad<=621 then
+				final_LV=20
+			else
+				final_LV=10				
+			end
+			if final_LV>70 then
+				final_LV=70
+			end
+			
+			if final_LV~=10 and final_LV~=0 then
+				local tmd=(energy-1)*6+final_LV*0.1-1
+			
+				final_ID3=TESHU_ID[tmd]
+			
+			end
+		end
+	end
+
+	if Itemnew_ID==2302 then
+		local STAR_BEGIN=1
+		local STAR_END=80
+		if energy==1 then
+			STAR_BEGIN=1
+			STAR_END=7
+		elseif energy==2 then
+			STAR_BEGIN=8
+			STAR_END=12
+		elseif energy==3 then
+			STAR_BEGIN=13
+			STAR_END=17
+		elseif energy==4 then
+			STAR_BEGIN=18
+			STAR_END=26
+		elseif energy==5 then
+			STAR_BEGIN=27
+			STAR_END=31
+		elseif energy==6 then
+			STAR_BEGIN=32
+			STAR_END=36
+		else
+			STAR_BEGIN=energy+30
+			STAR_END=energy+30             
+		end
+		for i = STAR_BEGIN , STAR_END , 1 do 
+		    General = ZHIZAO__Rad[ i ] + General		
+		end 
+		local a = math.random ( 1, General )
+		local b = 0
+		local d = 0 
+		local k = 0 
+		local c = -1
+		for k = STAR_BEGIN , STAR_END , 1 do
+			d = PENGREN__Rad[ k ] + b
+			if a <= d and a > b then
+				c = k
+				break 
+			end 
+			b = d 
+		end 
+		if c == -1 then
+			c =STAR_BEGIN
+		end
+		
+		final_ID=PENGREN_ID[c]
+		final_LV=PENGREN_LV[c]
+		final_ID1=PENGREN_ID1[c]
+		final_ID2=PENGREN_ID2[c]
+		final_ID3=PENGREN_ID3[c]		
+	end
+	
+	local star_number=energy*10
+	local yingbi_num=math.random ( 10, star_number )
+	if energy<=3 then
+		SetItemAttr(Itemnew, ITEMATTR_MAXURE, energy )
+		SetItemAttr(Itemnew, ITEMATTR_URE, energy )		
+	else
+		SetItemAttr(Itemnew, ITEMATTR_MAXURE, yingbi_num )
+		SetItemAttr(Itemnew, ITEMATTR_URE, energy )
+	end
+	local sta =math.random ( 1, 10 )
+	if Itemnew_ID==2301 then
+		sta=sta*0.5
+		sta=math.max(1,sta)
+	end
+	SetItemAttr(Itemnew, ITEMATTR_VAL_STA, sta )
+	local qulity=math.floor(final_LV*0.1)+100
+	SetItemAttr(Itemnew, ITEMATTR_MAXENERGY, qulity )
+
+	local ure=10-final_LV*0.1
+	SetItemAttr(Itemnew, ITEMATTR_ENERGY, ure )
+
+	SetItemAttr(Itemnew, ITEMATTR_VAL_STR, final_ID1 )
+	SetItemAttr(Itemnew, ITEMATTR_VAL_CON, final_ID2 )
+	SetItemAttr(Itemnew, ITEMATTR_VAL_DEX, final_ID3 )
+	SetItemAttr(Itemnew, ITEMATTR_VAL_AGI, final_ID )
+
+	local Num_new = GetItemForgeParam ( Itemnew , 1 )
+	local Part2_new = GetNum_Part2 ( Num_new )	
+	local Part4_new = GetNum_Part4 ( Num_new )
+	local Part6_new = GetNum_Part6 ( Num_new )
+	Part2_new = math.random ( 3, 20 )					
+	Part4_new = math.random ( 2, 9 )					
+	Part6_new = math.random ( 1, 3 )					
+	Part6_new = Part6_new*math.max(1,(energy-2))					
+	Num_new = SetNum_Part2 ( Num_new , Part2_new )
+	Num_new = SetNum_Part4 ( Num_new , Part4_new )
+	Num_new = SetNum_Part6 ( Num_new , Part6_new )
+	SetItemForgeParam ( Itemnew , 1 , Num_new )
+
+end 
+
+
+Variable for: 
+
+PENGREN_ID = Cooking
+ZHUZAO_ID = Crafting
+ZHIZAO_ID = Manufacturing

@@ -1,0 +1,26 @@
+function Unsea_sellerNpc ()
+	
+	
+	Talk( 1, "Unseal NPC: Hello, I am the UNseal NPC." )
+	Text( 1, "Trade", BuyPage )
+	
+	InitTrade()
+	Weapon(	764	) 
+	Weapon(	767	)
+	Weapon(	782	)
+	Weapon(	786	)
+	Weapon(	793	)
+	Weapon(	800	) 
+	Weapon(	771	)
+	Weapon(	774	)
+	Weapon(	778	)
+	Weapon(	790	)
+	Weapon(	796	)
+	Weapon(	803	)
+
+end
+
+
+
+
+152	Unseal NPC	1	883	0	224900,278800	224900,278800	270	Argent City	24	0	Unsea_sellerNpc	0

@@ -1,0 +1,54 @@
+function kyjj_tele ()
+
+	local ReSelectTalk = "I need to reconsider"
+	local ReSelectPage = 1
+
+	--cancel talk
+	local CancelSelectTalk = "Forget it, I will stay here"
+	local CancelSelectPage = 2
+
+	--maps
+	local CurMapName1 = "kyjj_1"	
+	local CurMapName2 = "kyjj_2"
+	local CurMapName3 = "kyjj_3"
+	
+	--kyjj_1
+	local GoTo01X = 68
+	local GoTo01Y = 68
+	local GoTo01M = CurMapName1
+
+	--kyjj_2
+	local GoTo02X = 68
+	local GoTo02Y = 68
+	local GoTo02M = CurMapName2
+
+	--kyjj_3
+	local GoTo03X = 68
+	local GoTo03Y = 68
+	local GoTo03M = CurMapName3
+
+	        Talk( 1, "Hi, Im the Kyjj teleporter, Where you want to go?" )
+                Text( 1, "Go kyjj1", JumpPage, 2 )
+                Text( 1, "Go kyjj2", JumpPage, 3 )
+		Text( 1, "Go kyjj3", JumpPage, 4 )
+	        
+                
+	        InitTrigger()
+	        TriggerAction( 2,  GoTo, GoTo01X, GoTo01Y, GoTo01M )
+		Talk( 2, "Want to go Kyjj1?" )
+	        Text( 2, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2)
+                Text( 2, "I Have Changed My Mind", JumpPage, 1 )
+
+	        InitTrigger()
+	        TriggerAction( 2,  GoTo, GoTo02X, GoTo02Y, GoTo02M )
+	        Talk( 3, "Want to go kyjj2?" )
+                Text( 3, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2)
+	        Text( 3, "I Have Changed My Mind", JumpPage, 1 )
+
+		InitTrigger()
+	        TriggerAction( 2,  GoTo, GoTo03X, GoTo03Y, GoTo03M )
+	        Talk( 4, "Want to go kyjj3?" )
+                Text( 4, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2)
+	        Text( 4, "I Have Changed My Mind", JumpPage, 1 )
+
+end

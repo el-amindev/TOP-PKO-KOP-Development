@@ -1,0 +1,178 @@
+8601    Attack Scroll    n1481    10130005    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    99    0    500000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    Item_Use_Pendowo    0    0    0    0,0    0    0    Recipe for upgrading Attack of Equipment. Put your equipment on 1st Slot of Inventory and Double click this scroll.    0
+8602    Defense Scroll    n1481    10130005    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    99    0    500000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    Item_Use_Pendowo    0    0    0    0,0    0    0    Recipe for upgrading Defense of Equipment. Put your equipment on 1st Slot of Inventory and Double click this scroll.    0
+8603    Physical Scroll    n1481    10130005    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    99    0    500000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    Item_Use_Pendowo    0    0    0    0,0    0    0    Recipe for upgrading Physical Resist of Equipment. Put your equipment on 1st Slot of Inventory and Double click this scroll.    0
+8604    Dodge Scroll    n1481    10130005    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    99    0    500000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    Item_Use_Pendowo    0    0    0    0,0    0    0    Recipe for upgrading Dodge of Equipment. Put your equipment on 1st Slot of Inventory and Double click this scroll.    0
+8605    Hit Rate Scroll    n1481    10130005    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    99    0    500000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    Item_Use_Pendowo    0    0    0    0,0    0    0    Recipe for upgrading Hit rate of Equipment. Put your equipment on 1st Slot of Inventory and Double click this scroll.    0
+
+function Item_Use_Pendowo(role,Item)
+
+    local Cha_Boat = 0
+    Cha_Boat = GetCtrlBoat ( role )
+    if Cha_Boat ~=  nil then
+        SystemNotice( role , "Cannot use while sailing!" )
+        UseItemFailed ( role )
+        return
+    end
+
+        local Equipment        = GetChaItem(role, 2, 0)
+        local EquipmentName    = GetItemName(GetItemID(Equipment))
+        local EquipmentType    = GetItemType2(GetItemID(Equipment))
+    local Item_ID        = GetItemID(Item)
+
+        if(Equipment == nil)then
+              SystemNotice(role,"Nothing inserted on 1st Inventory Slot.")
+        UseItemFailed ( role )
+        return
+        end
+
+
+    if Item_ID == 8601 then --Attack (Puntodewo)
+            if(EquipmentType == 1 or EquipmentType == 2 or EquipmentType == 3 or EquipmentType == 4 or EquipmentType == 7 or EquipmentType == 9)then
+
+                local ItemAttrI    = GetItemAttr(Equipment, ITEMATTR_VAL_MNATK)
+                local ItemAttrII = GetItemAttr(Equipment, ITEMATTR_VAL_MXATK)
+            local Bonus    = 200
+                local FinalAttrI = ItemAttrI + Bonus
+                local FinalAttrII= ItemAttrII + Bonus
+            local Limit    = 32000    --Limit value you want (Max 32767)
+
+            if (ItemAttrI >= Limit or ItemAttrII >= Limit) then
+                    SystemNotice(role,"Item has reached its upgrade limit!")
+                UseItemFailed ( role )
+                return
+            end
+
+            if (FinalAttrI >= Limit or FinalAttrII >= Limit) then
+                    SetItemAttr(Equipment, ITEMATTR_VAL_MNATK, Limit)
+                    SetItemAttr(Equipment, ITEMATTR_VAL_MXATK, Limit)
+            else
+                    SetItemAttr(Equipment, ITEMATTR_VAL_MNATK, FinalAttrI)
+                    SetItemAttr(Equipment, ITEMATTR_VAL_MXATK, FinalAttrII)
+            end
+
+                SystemNotice(role,"Successfully added +"..Bonus.." Attack to "..EquipmentName.."!")
+                RefreshCha(role)
+            else
+
+                SystemNotice(role,"Only Weapon can be upgrade by Attack Scroll!")
+            UseItemFailed ( role )
+            return
+            end
+
+    elseif Item_ID == 8602 then --Defense (Werkudoro)
+            if(EquipmentType == 20 or EquipmentType == 22 or EquipmentType == 23 or EquipmentType == 24 or EquipmentType == 27)then
+
+                local ItemAttr    = GetItemAttr(Equipment, ITEMATTR_VAL_DEF)
+            local Bonus    = 50
+                local FinalAttr = ItemAttr + Bonus
+            local Limit    = 5000
+
+            if (ItemAttr >= Limit) then
+                    SystemNotice(role,"Item has reached its upgrade limit!")
+                UseItemFailed ( role )
+                return
+            end
+
+            if (FinalAttr >= Limit) then
+                    SetItemAttr(Equipment, ITEMATTR_VAL_DEF, Limit)
+            else
+                    SetItemAttr(Equipment, ITEMATTR_VAL_DEF, FinalAttr)
+            end
+
+                SystemNotice(role,"Successfully added +"..Bonus.." Defense to "..EquipmentName.."!")
+                RefreshCha(role)
+            else
+
+                SystemNotice(role,"Only Armor,Boot,Glove and hat can be upgrade by Defense Scroll!")
+            UseItemFailed ( role )
+            return
+            end
+
+    elseif Item_ID == 8603 then --Phy Resist (Arjuno)
+            if(EquipmentType == 22 or EquipmentType == 27)then
+
+                local ItemAttr    = GetItemAttr(Equipment, ITEMATTR_VAL_PDEF)
+            local Bonus    = 5
+                local FinalAttr = ItemAttr + Bonus
+            local Limit    = 1000
+
+            if (ItemAttr >= Limit) then
+                    SystemNotice(role,"Item has reached its upgrade limit!")
+                UseItemFailed ( role )
+                return
+            end
+
+            if (FinalAttr >= Limit) then
+                    SetItemAttr(Equipment, ITEMATTR_VAL_PDEF, Limit)
+            else
+                    SetItemAttr(Equipment, ITEMATTR_VAL_PDEF, FinalAttr)
+            end
+
+                SystemNotice(role,"Successfully added +"..Bonus.." Physical Resist to "..EquipmentName.."!")
+                RefreshCha(role)
+            else
+
+                SystemNotice(role,"Only Armor and Tatoo can be upgrade by Physical Resist Scroll!")
+            UseItemFailed ( role )
+            return
+            end
+
+    elseif Item_ID == 8604 then --Dodge (Nakulo)
+            if(EquipmentType == 24 )then
+
+                local ItemAttr    = GetItemAttr(Equipment, ITEMATTR_VAL_FLEE)
+            local Bonus    = 5
+                local FinalAttr = ItemAttr + Bonus
+            local Limit    = 2000
+
+            if (ItemAttr >= Limit) then
+                    SystemNotice(role,"Item has reached its upgrade limit!")
+                UseItemFailed ( role )
+                return
+            end
+
+            if (FinalAttr >= Limit) then
+                    SetItemAttr(Equipment, ITEMATTR_VAL_FLEE, Limit)
+            else
+                    SetItemAttr(Equipment, ITEMATTR_VAL_FLEE, FinalAttr)
+            end
+
+                SystemNotice(role,"Successfully added +"..Bonus.." Dodge to "..EquipmentName.."!")
+                RefreshCha(role)
+            else
+
+                SystemNotice(role,"Only Boots can be upgrade by Dodge Scroll!")
+            UseItemFailed ( role )
+            return
+            end
+
+    elseif Item_ID == 8605 then --Hit rate (Sadewo)
+            if(EquipmentType == 23 )then
+
+                local ItemAttr    = GetItemAttr(Equipment, ITEMATTR_VAL_HIT)
+            local Bonus    = 5
+                local FinalAttr = ItemAttr + Bonus
+            local Limit    = 2000
+
+            if (ItemAttr >= Limit) then
+                    SystemNotice(role,"Item has reached its upgrade limit!")
+                UseItemFailed ( role )
+                return
+            end
+
+            if (FinalAttr >= Limit) then
+                    SetItemAttr(Equipment, ITEMATTR_VAL_HIT, Limit)
+            else
+                    SetItemAttr(Equipment, ITEMATTR_VAL_HIT, FinalAttr)
+            end
+
+                SystemNotice(role,"Successfully added +"..Bonus.." Hit rate to "..EquipmentName.."!")
+                RefreshCha(role)
+            else
+
+                SystemNotice(role,"Only Gloves can be upgrade by Hit rate Scroll!")
+            UseItemFailed ( role )
+            return
+            end
+    end
+end

@@ -1,0 +1,43 @@
+What is it?
+Okay let me explain, The online event system is the same as TOP event that you should be online for certain time to obtain an prize, check http://top2.igg.com/event/freelunch/ for more information, its similar to this one. In this script you no need to restart your server to activate it, you can use command to activate or deactivate it anytime you want! 
+
+How should it work?
+Player must be level 75+ and be online for 24 hours (Defaulted time) without being logged out. You can reduce the time, edit the prize in script below.
+
+Okay let's add it now!
+1st: Open your functions.lua and add this into cha_timer
+
+
+-- Set Hours, Default is 24 hours means 1 day
+local SetHours = 24
+local Level = GetChaAttr( role , ATTR_LV )
+if OnlineEvent == true and math.mod(now_tick, SetHours*3600) == 0 and now_tick > 0 and Level > 75 then
+local Prize = {}
+-- Put the Item ID
+Prize[1] = 192 -- Chest of Kylin
+Prize[2] = 2843 -- Rightful Chest of Black Dragon
+Prize[3] = 2842 -- Carcass of Death
+-- Getting in Random
+local i = math.random (1,3)
+-- Add Prize
+local cha = TurnToCha (role)
+local ItemName = GetItemName (Prize[i])
+GiveItem ( cha , 0 , Prize[i] , 1 , 4 )
+ 
+-- Send notice to Player
+SystemNotice(cha,"Congratulations! You have been online for "..SetHours.." hours long and you've been awarded a "..ItemName.."! #10")
+end
+
+2nd: Open your variable.lua and add this into the end
+
+
+OnlineEvent = false
+
+Okay now how to use them!
+To start activating the Event
+&lua_all OnlineEvent = true
+--
+To stop activating the Event
+&lua_all OnlineEvent = false
+
+100% tested and working enjoy it and don't forget to press Like This if you like

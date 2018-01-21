@@ -1,0 +1,17 @@
+function ItemUse_xxxx ( role , Item )
+local cha = TurnToCha ( role )
+local cha_type = GetChaTypeID ( cha )
+ 
+local Item_CanGet = GetChaFreeBagGridNum ( cha )
+ 
+if Item_CanGet <= 1 then
+SystemNotice(role ,"Requires 1 slots in inventory to open Rage Chest")
+UseItemFailed ( role )
+return
+end
+ 
+GiveItem ( cha , 0 , id of the gem , 1 , 105 ) -- 105 means that the lv of the gem will be 5, 109 = lv 9 gem. so 101,102,103,104,105,106,107,108,109 for gem lvs.
+local message = cha_name.." opened Rage Chest and obtained Lv 5 Gem of Rage! "  
+Notice ( message )
+end
+ 

@@ -1,0 +1,59 @@
+open resource\script\MisSdk\MissionSdk.lua
+
+find:
+
+   if conditions[i].func == NoMission then
+        PRINT( "ConditionsTest:NoMission, p1 = ", conditions[i].p1 )
+        local Ret = NoMission( character, conditions[i].p1 )
+        if Ret ~= LUA_TRUE then
+         PRINT( "ConditionsTest: NoMission = false" )
+         return LUA_FALSE
+        end
+
+add:
+
+   elseif conditions[i].func == ChaIsBuffed then
+        PRINT( "ConditionsTest:ChaIsBuffed" )
+        local ret = ChaIsBuffed( character )
+        if ret ~= LUA_TRUE then
+         PRINT( "ConditionsTest:ChaIsBuffed = false" )
+         return LUA_FALSE
+        end
+
+
+then scroll down in the end of your MissionSdk.lua
+
+add this:
+
+function ChaIsBuffed (role)
+local StateType1 = GetChaStateLv (role, STATE_XLZH)
+local StateType2 = GetChaStateLv (role, STATE_SHPF)
+local StateType3 = GetChaStateLv (role, STATE_TSHD)
+local StateType4 = GetChaStateLv (role, STATE_MLCH)
+local StateType5 = GetChaStateLv (role, STATE_FZLZ)
+if StateType1 == 0 and StateType2 == 0 and StateType3 == 0 and StateType4 == 0 and StateType5 == 0 then
+  return LUA_TRUE
+else
+  return LUA_FALSE
+end
+end
+
+
+next step: open your NPC script (where your npc had the script for sail) mine ? just like this:
+
+function yudha_sail()
+Talk( 1, " Irene: Hi! I am the Harbor Operator for Argent. I am in charge of all ships that is docked in this harbor. Look for me if you want to set sail." )
+InitTrigger()
+TriggerCondition( 1, ChaIsBuffed, 1 )
+TriggerAction( 1, JumpPage,8 )
+TriggerFailure( 1, JumpPage, 7 )
+Text( 1, "Set sail", MultiTrigger, GetMultiTrigger(), 1 )
+Talk( 3, "Sorry, you do not have a ship at the harbor or it was sunken. Please salvage it before setting sail again!" )
+Talk( 7, "Sorry! We cant activate your ship while you are buffed !" )
+Talk( 8, " Irene: are you sure ? " )
+InitTrigger()
+TriggerCondition( 1, HasAllBoatInBerth, 1 )
+TriggerAction( 1, LuanchBerthList, 1, 2190,2839, 177 )
+TriggerFailure( 1, JumpPage, 3 )
+Text( 8, "yeap.. Lets Go !", MultiTrigger, GetMultiTrigger(), 1 )
+end

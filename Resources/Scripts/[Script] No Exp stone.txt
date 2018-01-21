@@ -1,0 +1,23 @@
+Here you go if you want a stone if it is in your inventory you will obtain no exp
+
+(Good for ds/fc)
+
+Go to resource/scripts/calculate/exp_and_level.lua
+
+search for 
+
+
+exp_up = exp_up * EXP_RAID_STATE
+
+somewhere under that add
+
+
+local checkstone = CheckBagItem( TurnToCha(t[i]), XXXX )
+if checkstone > 0 then
+exp_up = 0
+SystemNotice ( TurnToCha(t[i]) , "No EXP Stone activated! You obtained no exp from this mob" )
+end
+
+iteminfo.txt
+
+xxxx No-Exp Stone n0539 10130005 0 0 0 0 0 0 41 0 0 0 0 0 1 1 1 1 99 0 84 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 You wont gain any exp from any mobs with me in your inventory :) 0

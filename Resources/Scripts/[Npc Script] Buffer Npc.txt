@@ -1,0 +1,57 @@
+Put in NpcScript1-9(any just pick 1)
+
+function purej_buffer1 ()
+     Talk (1, "God Father: If you are a girl PureJuice could use you if you get what i mean")
+     Text (1, "I want to get Blessing beginner.", JumpPage, 2)
+     Text (1, "God Father (PureJuice) Blessing", PureBuff1, 1)
+     Text (1, "Goodbye", CloseTalk)
+    
+     Talk (2, "Priest: Favors gods achieve is not easy. Are you ready to donate 1000 gold coins in the name of their fame?")
+     Text (2, "to strengthen my body (+20 defense)", NewbieBuff1, 1)
+     Text (2, "Help defeat the enemies (10 attacks)", NewbieBuff2, 1)
+     Text (2, "Give me the will to live (+50 life)", NewbieBuff3, 1)
+     Text (2, "Back", JumpPage, 1)
+
+end
+
+
+Put in NpcSdk search for return ChangeItem(character,npc) and put this under
+
+	elseif item.func == NewbieBuff1 then
+            return NewbieBuff1(character)
+        elseif item.func == NewbieBuff2 then
+            return NewbieBuff2(character)
+        elseif item.func == NewbieBuff3 then
+            return NewbieBuff3(character)
+        elseif item.func == PureBuff1 then
+            return PureBuff1(character)	
+
+
+
+Put this at the end of forge.lua
+
+function PureBuff1 (role)
+
+local money = HasMoney (role, 10000)
+
+if money == 0 then
+SystemNotice (role, "Do you have enough gold!")
+end
+
+local StateType = GetChaStateLv (role, STATE_XLZH)
+local StateType = GetChaStateLv (role, STATE_SHPF)
+local StateType = GetChaStateLv (role, STATE_TSHD)
+local StateType = GetChaStateLv (role, STATE_MLCH)
+local StateType = GetChaStateLv (role, STATE_FZLZ)
+if StateType == 0 then
+AddState (role, role, STATE_XLZH, 10, 600)
+AddState (role, role, STATE_SHPF, 10, 600)
+AddState (role, role, STATE_TSHD, 10, 600)
+AddState (role, role, STATE_MLCH, 10, 600)
+AddState (role, role, STATE_FZLZ, 10, 600) 
+TakeMoney (role, nil, 10000)
+SystemNotice (role, "Great you just took some viagra dont over do it dude/Dame Girl that E make you crazy")
+else
+SystemNotice (role, "Fuck off, got A small dick go kill yourself | Want some more E b!tch suck PureJuice's dick")
+end
+end

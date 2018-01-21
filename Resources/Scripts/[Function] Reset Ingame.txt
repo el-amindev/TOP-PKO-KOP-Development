@@ -1,0 +1,117 @@
+function Re_Born ( role )
+	local check=Get_Reset ( role )
+	if check==0 then
+		SystemNotice( role, "Reset Requirements not met" )
+		return
+	end
+	local cha_gd = GetChaAttr(role, ATTR_GD)
+	local need_gd = 1000000
+	local final_gd = cha_gd - need_gd
+	local cha_name = GetChaDefaultName ( role )
+	local cha_lv = GetChaAttr(role, ATTR_LV) 
+	local cha_job = GetChaAttr(role, ATTR_JOB)
+
+	local cha_skill_num=GetChaAttr(role, ATTR_TP  )
+
+	local clear_skill_num=ClearFightSkill(role)
+
+	cha_skill_num=cha_skill_num+clear_skill_num-93+5
+	SetChaAttr(role, ATTR_TP ,cha_skill_num ) 
+
+	local ap = GetChaAttr( role , ATTR_AP )
+
+	local cha_str = GetChaAttr(role, ATTR_BSTR  ) 
+	local cha_dex = GetChaAttr(role, ATTR_BDEX  ) 
+	local cha_agi = GetChaAttr(role, ATTR_BAGI  ) 
+	local cha_con = GetChaAttr(role, ATTR_BCON ) 
+	local cha_sta = GetChaAttr(role, ATTR_BSTA )
+	ap=ap+cha_str+cha_dex+cha_agi+cha_con+cha_sta-195+20
+	SetChaAttr(role, ATTR_BSTR ,5 ) 
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_BDEX ,5 ) 
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_BAGI ,5 ) 
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_BCON,5 ) 
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_BSTA,5 ) 
+	SyncChar(role,4)
+	SetChaAttr(role , ATTR_AP,ap  )
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_CEXP,1 )
+	SyncChar(role,4)
+	SetChaAttr(role, ATTR_LV,1 )
+	SyncChar(role,4)
+	SetChaAttr(role,ATTR_GD,final_gd )
+	SyncChar(role,4)
+	RefreshCha ( role )
+
+	Notice("Extreme celebration "..cha_name.." Reset successful. Blessing from the whole server "..cha_name.." Hope you have a safe journey and everything goes your way!")
+	local Zs_Exp = GetChaAttr ( role , ATTR_CSAILEXP )
+	local cha_job = GetChaAttr( role , ATTR_JOB )
+		if Zs_Exp >=12000 and Zs_Exp and cha_job == 9 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 453 , 3 , 3 , 0 )
+		elseif Zs_Exp >=12000 and cha_job == 8 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 455 , 3 , 3 , 0 )
+		elseif Zs_Exp >=12000 and cha_job == 16 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 454 , 3 , 3 , 0 )
+		elseif Zs_Exp >=12000 and cha_job == 12 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 456 , 3 , 3 , 0 )
+		elseif Zs_Exp >=12000 and cha_job == 13 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 458 , 3 , 3 , 0 )
+		elseif Zs_Exp >=12000 and cha_job == 14 then			
+			AddChaSkill ( role , 459 , 3 , 3 , 0 )
+			AddChaSkill ( role , 457 , 3 , 3 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 9 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 453 , 2 , 2 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 8 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 455 , 2 , 2 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 16 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 454 , 2 , 2 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 12 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 456 , 2 , 2 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 13 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 458 , 2 , 2 , 0 )
+		elseif Zs_Exp >=9000 and Zs_Exp < 12000 and cha_job == 14 then			
+			AddChaSkill ( role , 459 , 2 , 2 , 0 )
+			AddChaSkill ( role , 457 , 2 , 2 , 0 )
+		elseif Zs_Exp > 0 and Zs_Exp < 9000 then
+			AddChaSkill ( role , 459 , 1 , 1 , 0 )
+			GiveItem_zsbook ( role )
+		end
+	return 1
+
+
+end
+
+function Get_Reset ( role )
+	local cha_lv = GetChaAttr(role, ATTR_LV) 
+	local cha_gd = GetChaAttr(role, ATTR_GD)
+	local need_gd = 1000000
+	local final_gd = cha_gd - need_gd
+	local item_empty=IsEquip(role)
+
+	if cha_gd < need_gd then
+		SystemNotice( role,"Sorry but you need "..need_gd.." to do the reset")
+		return 0
+	end
+	if cha_lv < 94 then
+		SystemNotice( role ,"Sorry but you need to be lv 95+ to reset yourself")
+		return 0
+	end
+	if item_empty==LUA_TRUE then
+		SystemNotice(role,"Please place the item from character's equipment slot into the inventory")
+		return 0	
+	end
+	RefreshCha ( role )
+end

@@ -1,0 +1,34 @@
+hello, with it we can activate/deactivate double exp in server.
+
+cha_timer:
+
+
+
+-----------
+
+if  (DoubleExp == true) then
+EXP_RAID = 20                                    -- Rates x2
+MF_RAID = 30
+TeamExp_RAID = 30
+else
+EXP_RAID = 10                                    -- Real rates
+MF_RAID = 15
+TeamExp_RAID = 15
+end
+
+-----------
+
+
+add it at end of variable.lua :
+
+DoubleExp = false
+
+to activate:
+
+with command gm lua_all
+
+&lua_all DoubleExp = true
+
+to deactivate:
+
+&lua_all DoubleExp = false

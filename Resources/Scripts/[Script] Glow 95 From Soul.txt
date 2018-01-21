@@ -1,0 +1,62 @@
+             local Glows = {}
+                Glows[8] = { Body = 2817, Ring = 2577, State = STATE_BBRING1 }
+                Glows[9] = { Body = 2820, Ring = 2578, State = STATE_BBRING2 }
+                Glows[12] = { Body = 2823, Ring = 2579, State = STATE_BBRING3 }
+                Glows[16] = { Body = 2826, Ring = 2580, State = STATE_BBRING4 }
+                Glows[14] = { Body = 2832, Ring = 2581, State = STATE_BBRING5 }
+                Glows[13] = { Body = 2829, Ring = 2582, State = STATE_BBRING6 }
+
+Glows2 = {}
+Glows2[8] = {Hat = 6104, Body = 6105, Glove = 6106, Boot = 6107 }
+Glows2[9] = {Hat = 6108, Body = 6109, Glove = 6110, Boot = 6111 }
+
+
+                local HatID = GetEquipItemP(role,0)
+                local Hat_ID = GetItemID(HatID)
+                local BodyID = GetEquipItemP(role,2)
+                local Body_ID = GetItemID(BodyID)
+                local GloveID = GetEquipItemP(role,3)   
+                local Glove_ID = GetItemID(GloveID)
+                local BootID = GetEquipItemP(role,4)
+                local Boot_ID = GetItemID(BootID)
+                local RingID = GetEquipItemP(role,8)
+                local Ring_ID = GetItemID(RingID)
+
+                local Class = GetChaAttr( role, ATTR_JOB )
+                local Level = 1
+                local Time = 3600
+
+                if Body_ID == Glows[Class].Body and Ring_ID == Glows[Class].Ring then
+                        AddState ( role , role , Glows[Class].State , Level , Time )
+                elseif Hat_ID == Glows2[Class].Hat and Body_ID == Glows2[Class].Body and Glove_ID == Glows2[Class].Glove and Boot_ID == Glows2[Class].Boot then
+                        AddState ( role , role , STATE_BBRING7 , Level , Time ) 
+                else
+                        local statelv_bbring1 = GetChaStateLv ( role , STATE_BBRING1 )
+                        if statelv_bbring1~=0 then
+                                RemoveState ( role , STATE_BBRING1 ) 
+                        end
+                        local statelv_bbring2 = GetChaStateLv ( role , STATE_BBRING2 )
+                        if statelv_bbring2~=0 then
+                                RemoveState ( role , STATE_BBRING2 ) 
+                        end
+                        local statelv_bbring3 = GetChaStateLv ( role , STATE_BBRING3 )
+                        if statelv_bbring3~=0 then
+                                RemoveState ( role , STATE_BBRING3 ) 
+                        end
+                        local statelv_bbring4 = GetChaStateLv ( role , STATE_BBRING4 )
+                        if statelv_bbring4~=0 then
+                                RemoveState ( role , STATE_BBRING4 ) 
+                        end
+                        local statelv_bbring5 = GetChaStateLv ( role , STATE_BBRING5 )
+                        if statelv_bbring5~=0 then
+                                RemoveState ( role , STATE_BBRING5 ) 
+                        end
+                        local statelv_bbring6 = GetChaStateLv ( role , STATE_BBRING6 )
+                        if statelv_bbring6~=0 then
+                                RemoveState ( role , STATE_BBRING6 ) 
+                        end     
+                        local statelv_bbring7 = GetChaStateLv ( role , STATE_BBRING7 )
+                        if statelv_bbring7~=0 then
+                                RemoveState ( role , STATE_BBRING7 ) 
+                        end
+                end

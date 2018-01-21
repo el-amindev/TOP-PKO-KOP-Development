@@ -1,0 +1,18 @@
+local Now_Week = GetNowWeek ()
+if Now_Week == 6 or Now_Week == 7 then
+
+EXP_RAID = 6
+MF_RAID = 20
+Resource_RAID_ADJUST = 20
+TeamExp_RAID = 10
+ELEEXP_GETRAD = 500
+
+else
+
+EXP_RAID = 3
+MF_RAID = 10
+Resource_RAID_ADJUST = 10
+TeamExp_RAID = 5
+ELEEXP_GETRAD = 250
+
+end

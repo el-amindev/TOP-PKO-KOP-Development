@@ -1,0 +1,51 @@
+xxxx	Item+27	n1257	10130023	0	0	0	0	0	0	41	0	0	0	0	0	1	1	1	1	99	0	180	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_sword1	0	0	0	0,0	0	0	Contain +27 sword	0
+
+
+function ItemUse_sword1 ( role , Item )
+	
+	GiveItem(role,0,776,1,18) -- ItemID (Can be founded in iteminfo.txt)
+	local Equip = GetChaItem2(role,2,776)
+        local param = GetItemForgeParam(Equip,1)
+        local Item_Stone = {}
+        local Item_StoneLv = {}
+        local GemIDSlot01 = 25 -- Gem Stone ID A ( Can be founded in stoneinfo.txt )
+        local GemIDSlot02 = 12 -- Gem Stone ID A ( Can be founded in stoneinfo.txt )
+        local GemIDSlot03 = 13 -- Gem Stone ID A ( Can be founded in stoneinfo.txt )
+        local GemLevelSlot01 = 9 -- Gem Level - 1 ~ 9
+        local GemLevelSlot02 = 9 -- Gem Level - 1 ~ 9
+        local GemLevelSlot03 = 9 -- Gem Level - 1 ~ 9
+
+        param = TansferNum(param)
+        Item_Stone[0] = GetNum_Part2(param)
+        Item_StoneLv[0] = GetNum_Part3(param)
+        Item_Stone[0] = GemIDSlot01
+        Item_StoneLv[0] = GemLevelSlot01  
+        param = SetNum_Part2(param,Item_Stone[0])
+        param = SetNum_Part3(param,Item_StoneLv[0])
+        SetItemForgeParam(Equip,1,param)
+
+        param = TansferNum(param)
+        Item_Stone[1] = GetNum_Part2(param)
+        Item_StoneLv[1] = GetNum_Part3(param)
+        Item_Stone[1] = GemIDSlot02  
+        Item_StoneLv[1] = GemLevelSlot02
+        param = SetNum_Part4(param, Item_Stone[1])  
+        param = SetNum_Part5(param, Item_StoneLv[1])  
+        SetItemForgeParam(Equip, 1, param)
+
+        param = TansferNum(param)
+        Item_Stone[2] = GetNum_Part2(param)
+        Item_StoneLv[2] = GetNum_Part3(param)
+        Item_Stone[2] = GemIDSlot03  
+        Item_StoneLv[2] = GemLevelSlot03
+        param = SetNum_Part6(param,Item_Stone[2])  
+        param = SetNum_Part7(param,Item_StoneLv[2])
+        SetItemForgeParam(Equip,1,param)
+
+        local Socket = GetItemForgeParam(Equip,1)
+        Socket = TansferNum(Socket)
+        Socket = SetNum_Part1(Socket,3)
+        SetItemForgeParam(Equip,1,Socket)
+        RefreshCha(role)
+     
+end

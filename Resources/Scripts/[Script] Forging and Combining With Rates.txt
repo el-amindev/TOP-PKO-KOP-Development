@@ -1,0 +1,145 @@
+-----------------------------------
+Open forge.lua file and search for:
+-----------------------------------
+
+        local Check_A = math.max ( 0.02 , math.min ( 1 , ( 1 - Baoshi_NeedLv * 0.1 + Sklv * 0.15 - 0.3 ) ) )
+        local CheckFaild = Percentage_Random ( Check_A )
+        
+        if Baoshi_NeedLv < 4 then
+                CheckFaild = 1
+        end
+
+        if CheckFaild == 1 then
+                Check_Jinglian_Item = Jinglian_Item ( Item_Jinglian , Item_Stone1 , Item_Stone2 )
+        else
+                local cha_name = GetChaDefaultName ( role )
+                local Item_Jinglian_name = GetItemName ( ItemID_Jinglian )
+                LG( "JingLian_ShiBai" , "Player ["..cha_name.."] Forging of equipment failed. Equipment is not damaged - "..Item_Jinglian_name )
+                SystemNotice ( role , "Sorry, forging has failed. Luckily equipment is not damage" )
+        end
+
+----------------------------------
+delete this part and replace with:
+----------------------------------
+
+        local Check_A
+        local CheckFaild
+        
+        if Baoshi_NeedLv < 4 then               
+                Check_A = 1
+                CheckFaild = Percentage_Random ( Check_A )
+
+        elseif Baoshi_NeedLv == 4 then
+                Check_A = 0.9
+                CheckFaild = Percentage_Random ( Check_A )
+                
+        elseif Baoshi_NeedLv == 5 then
+                Check_A = 0.7
+                CheckFaild = Percentage_Random ( Check_A )
+                                
+        elseif Baoshi_NeedLv == 6 then
+                Check_A = 0.6
+                CheckFaild = Percentage_Random ( Check_A )              
+                
+        elseif Baoshi_NeedLv == 7 then
+                Check_A = 0.5
+                CheckFaild = Percentage_Random ( Check_A )      
+                
+        elseif Baoshi_NeedLv == 8 then
+                Check_A = 0.4
+                CheckFaild = Percentage_Random ( Check_A )
+                
+        elseif Baoshi_NeedLv == 9 then
+                Check_A = 0.3
+                CheckFaild = Percentage_Random ( Check_A )
+        end
+
+        if CheckFaild == 1 then
+                Check_Jinglian_Item = Jinglian_Item ( Item_Jinglian , Item_Stone1 , Item_Stone2 )
+        else
+                local cha_name = GetChaDefaultName ( role )
+                local Item_Jinglian_name = GetItemName ( ItemID_Jinglian )
+                LG( "JingLian_ShiBai" , "Player ["..cha_name.."] Forging of equipment failed. Equipment is not damaged - "..Item_Jinglian_name )
+                SystemNotice ( role , "Damn sorry, forging has failed! Luckily equipment is not damaged..." )
+        end
+
+----------------
+
+In this code rates can be set in easy way: the Check_A after every Baoshi_NeedLv is the % of success ( for example for level 9 gem you got 0.3 = 30% ).
+
+That's pretty nice and easy to edit. =)
+
+For combining is almost the same, search for:
+
+----------------
+
+function Check_CG_HechengBS ( Item_Lv , Item_Type , Sklv )
+        local a = 0
+        local b = 0
+        Item_Lv = Item_Lv - 1
+        if Item_Type == 49 then
+                a = math.max ( 0 , math.min ( 1 , ( 1 - Item_Lv * 0.10 + Sklv * 0.10 ) ) )
+                b = Percentage_Random ( a )
+                if Item_Lv < 3 then
+                        b = 1
+                end
+                return b
+        elseif Item_Type == 50 then
+                a = math.max ( 0 , math.min ( 1 , ( 1 - Item_Lv * 0.05 + Sklv * 0.15 ) ) )
+                b = Percentage_Random ( a )
+                return b
+        else
+                LG( "Hecheng_BS","probability check determine item type is not a gem" )
+                return 0
+        end
+end
+
+-----------------
+and replace with:
+-----------------
+
+function Check_CG_HechengBS ( Item_Lv , Item_Type , Sklv )
+
+        Item_Lv = Item_Lv - 1
+        if Item_Type == 49 or Item_Type == 50 then
+                local a
+                local b
+
+                if Item_Lv < 3 then
+                        a = 1
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 3 then
+                        a = 0.9
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 4 then
+                        a = 0.8
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 5 then
+                        a = 0.7
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 6 then
+                        a = 0.6
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 7 then
+                        a = 0.5
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 8 then
+                        a = 0.4
+                        b = Percentage_Random ( a )
+
+                elseif Item_Lv == 9 then
+                        a = 0.3
+                        b = Percentage_Random ( a )
+                end
+                return b
+        else
+                LG( "Hecheng_BS","probability check determine item type is not a gem" )
+                return 0
+        end
+end

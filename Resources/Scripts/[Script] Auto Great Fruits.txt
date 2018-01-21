@@ -1,0 +1,71 @@
+Hello guys, I'm posting here a script that I created, hope you like.
+
+Functions.lua in Cha_timer:
+
+---------------------------
+
+--------------------------------------------------------------------- Auto Fairy Fruit
+   local Item_bg1 = GetChaItem ( role , 2 , 1  )
+   local Get_Item_Type1 = GetItemType ( Item_bg1 )
+   local ItemUse_siliao1 = GetChaItem ( role , 2 , 3  )
+   local ItemUse_siliao_ID1 = GetItemID ( ItemUse_siliao1 )
+---------------------------------------------------------------------
+   if Get_Item_Type1 == 59 then
+        local Elf_MEXP = GetItemAttr( Item_bg1 ,ITEMATTR_MAXENERGY )
+        local Elf_EXP = GetItemAttr( Item_bg1 ,ITEMATTR_ENERGY )
+        local Num_JLone = GetItemForgeParam ( Item_bg1 , 1 )
+        local Part1_JLone = GetNum_Part1 ( Num_JLone )
+        if Elf_EXP>=Elf_MEXP and ItemUse_siliao_ID1==7803 then --ID Fruit STR
+         local j = TakeItem(  role,0,7803,1)
+         if j==0 then
+          SystemNotice ( role , "Deleting of Fruit failed!" )
+         else
+          SystemNotice ( role , "Automatic Pet Lv Up successful." )
+          Lvup_Str_1 ( role , Item_Num , Item_bg1 ) --Great STR
+         end
+        elseif  Elf_EXP>=Elf_MEXP and ItemUse_siliao_ID1==7804 then --ID Fruit AGI
+         local j = TakeItem(  role,0,7804,1)
+         if j==0 then
+          SystemNotice ( role , "Deleting of Fruit failed!" )
+         else
+          SystemNotice ( role , "Automatic Pet Lv Up successful." )
+          Lvup_Agi_1 ( role , Item_Num , Item_bg1 ) --Great AGI
+         end
+        elseif  Elf_EXP>=Elf_MEXP and ItemUse_siliao_ID1==7805 then --ID Fruit DEX
+         local j = TakeItem(  role,0,7805,1)
+         if j==0 then
+          SystemNotice ( role , "Deleting of Fruit failed!" )
+         else
+          SystemNotice ( role , "Automatic Pet Lv Up successful." )
+          Lvup_Dex_1 ( role , Item_Num , Item_bg1 ) --Great DEX(Auto Great Zephyr Fish Floss)
+         end
+        elseif  Elf_EXP>=Elf_MEXP and ItemUse_siliao_ID1==7806 then --ID Fruit CON
+         local j = TakeItem(  role,0,7806,1)
+         if j==0 then
+          SystemNotice ( role , "Deleting of Fruit failed!" )
+         else
+          SystemNotice ( role , "Automatic Pet Lv Up successful." )
+          Lvup_Con_1 ( role , Item_Num , Item_bg1 ) --Great CON
+         end
+        elseif  Elf_EXP>=Elf_MEXP and ItemUse_siliao_ID1==7807 then --ID Fruit STA
+         local j = TakeItem(  role,0,7807,1)
+         if j==0 then
+          SystemNotice ( role , "Deleting of Fruit failed!" )
+         else
+          SystemNotice ( role , "Automatic Pet Lv Up successful." )
+          Lvup_Sta_1 ( role , Item_Num , Item_bg1 ) --Great STA
+         end
+        end
+   end
+------------------------------------
+
+
+inteminfo.txt
+
+
+
+7803 Auto Great Snow Dragon Fruit n1484 10130005 0 0 0 0 0 0 58 0 0 0 0 0 1 1 1 1 99 0 50000 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_CJ_longguo 0 0 0 0,0 0,0 0,0 Obtainable from Item Mall. Place it on the 4th slot of the inventory. Raise pet fairy's Strength by 2 upon usage.
+7804 Auto Great Icespire Plum n1485 10130005 0 0 0 0 0 0 58 0 0 0 0 0 1 1 1 1 99 0 50000 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_CJ_koumei 0 0 0 0,0 0,0 0,0 Obtainable from Item Mall. Place it on the 4th slot of the inventory. Raise pet fairy's Agility by 2 upon usage.
+7805 Auto Great Zephyr Fish Floss n1486 10130005 0 0 0 0 0 0 58 0 0 0 0 0 1 1 1 1 99 0 50000 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_CJ_yusi 0 0 0 0,0 0,0 0,0 Obtainable from Item Mall. Place it on the 4th slot of the inventory. Raise pet fairy's Accuracy by 2 upon usage.
+7806 Auto Great Argent Mango n1487 10130005 0 0 0 0 0 0 58 0 0 0 0 0 1 1 1 1 99 0 50000 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_CJ_guopu 0 0 0 0,0 0,0 0,0 Obtainable from Item Mall. Place it on the 4th slot of the inventory. Raise pet fairy's Constitution by 2 upon usage.
+7807 Auto Great Shaitan Biscuit n1488 10130005 0 0 0 0 0 0 58 0 0 0 0 0 1 1 1 1 99 0 50000 -1,-2,-2,-2 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 -1,-2,-2,-2,-2,-2,-2,-2,-2,-2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0 0,0 0,0 0 0 0 0 0 0 0 0 0 ItemUse_CJ_mibing 0 0 0 0,0 0,0 0,0 Obtainable from Item Mall. Place it on the 4th slot of the inventory. Raise pet fairy's Spirit by 2 upon usage.

@@ -1,0 +1,117 @@
+function ItemUse_ReforgeNote(role,Item)
+local Deforge = GetChaItem ( role , 2 , 0 )
+local FrogeTo = GetChaItem ( role , 2 , 1 )
+local Deforge_type = GetItemType2(GetItemID(Deforge))
+local ForgeTo_type = GetItemType2(GetItemID(FrogeTo))
+if Deforge_type > 26 or ForgeTo_type > 26 then
+SystemNotice(role,"Please put an equipment!")
+UseItemFailed(role)
+return 0
+end
+if Deforge_type ~= ForgeTo_type then
+SystemNotice(role,"Item type on slot [1] not the same as slot [2]. Reforge failed!")
+UseItemFailed(role)
+return 0
+end
+local param = GetItemForgeParam(Deforge, 1)
+local ForgteTo_param = GetItemForgeParam(FrogeTo, 1)
+local Item_Stone = { }
+local Item_StoneLv = { }
+param = TansferNum(param)
+ForgteTo_param = TansferNum(ForgteTo_param)
+-- Gets every gem from item on slot 2
+Sockets = GetNum_Part1(param)
+Item_Stone[0] = GetNum_Part2(param)
+Item_Stone[1] = GetNum_Part4(param)
+Item_Stone[2] = GetNum_Part6(param)
+Item_StoneLv[0] = GetNum_Part3(param)
+Item_StoneLv[1] = GetNum_Part5(param)
+Item_StoneLv[2] = GetNum_Part7(param)
+if Item_Stone[1] == 0 and Item_Stone[1] == 0 and Item_Stone[2] == 0 then
+SystemNotice(role,"The item you desire to deforge is empty. Reforge failed!")
+UseItemFailed(role)
+return 0
+end
+local DeforgeItemName = GetItemName(GetItemID(Deforge))
+local ForgeItemName = GetItemName(GetItemID(FrogeTo))
+-- Forge Item on slot 2
+ForgteTo_param = SetNum_Part1(ForgteTo_param, Sockets)
+ForgteTo_param = SetNum_Part2(ForgteTo_param, Item_Stone[0])
+ForgteTo_param = SetNum_Part3(ForgteTo_param, Item_StoneLv[0])
+ForgteTo_param = SetNum_Part4(ForgteTo_param, Item_Stone[1])
+ForgteTo_param = SetNum_Part5(ForgteTo_param, Item_StoneLv[1])
+ForgteTo_param = SetNum_Part6(ForgteTo_param, Item_Stone[2])
+ForgteTo_param = SetNum_Part7(ForgteTo_param, Item_StoneLv[2])
+SetItemForgeParam(FrogeTo, 1, ForgteTo_param)
+-- Remove Gems from old Eq
+param = SetNum_Part1(param, Sockets)
+param = SetNum_Part2(param, 0)
+param = SetNum_Part3(param, 0)
+param = SetNum_Part4(param, 0)
+param = SetNum_Part5(param, 0)
+param = SetNum_Part6(param, 0)
+param = SetNum_Part7(param, 0)
+SetItemForgeParam(Deforge, 1, param)
+-------------------------------------
+RefreshCha(role)
+SystemNotice(role,"Succesfully moved gems from ["..DeforgeItemName.."] to {{"..ForgeItemName.."}}")
+end
+
+
+
+
+
+
+Simply put item in slot 1 to deforge and item in slot 2 to forge in.
+
+a free function too to use anywhere u wanan forge etc.
+
+
+
+
+
+ 
+function GiveForgedItem( role , Item , Sockets , gem1 , lv1 , gem2 , lv2 , gem3 , lv3 )
+local ForgedPlayer = role
+r1, r2 = MakeItem ( ForgedPlayer , Item , 1 , 4 )
+local Armor = GetChaItem2(ForgedPlayer, 2 , r2 )
+local param = GetItemForgeParam(Armor, 1)
+local Item_Stone = { }
+local Item_StoneLv = { }
+if gem1 ~= nil then
+param = TansferNum(param)
+Item_Stone[0] = GetNum_Part2(param)
+Item_StoneLv[0] = GetNum_Part3(param)
+Item_Stone[0] = gem1 -- Gem ID
+Item_StoneLv[0] = lv1 -- Gem Lv
+param = SetNum_Part2(param, Item_Stone[0]) -- Forge gem [Slot 1]
+param = SetNum_Part3(param, Item_StoneLv[0]) -- Set gem Lv [Slot 1]
+SetItemForgeParam(Armor, 1, param)
+end
+if gem2 ~= nil then
+param = TansferNum(param)
+Item_Stone[1] = GetNum_Part2(param)
+Item_StoneLv[1] = GetNum_Part3(param)
+Item_Stone[1] = gem2 -- Gem ID
+Item_StoneLv[1] = lv2 -- Gem Lv
+param = SetNum_Part4(param, Item_Stone[1]) -- Forge gem [Slot 1]
+param = SetNum_Part5(param, Item_StoneLv[1]) -- Set gem Lv [Slot 1]
+SetItemForgeParam(Armor, 1, param)
+end
+if gem3 ~= nil then
+param = TansferNum(param)
+Item_Stone[2] = GetNum_Part2(param)
+Item_StoneLv[2] = GetNum_Part3(param)
+Item_Stone[2] = gem3 -- Gem ID
+Item_StoneLv[2] = lv3 -- Gem Lv
+param = SetNum_Part6(param, Item_Stone[2]) -- Forge gem [Slot 1]
+param = SetNum_Part7(param, Item_StoneLv[2]) -- Set gem Lv [Slot 1]
+SetItemForgeParam(Armor, 1, param)
+end
+--- Add socket --
+local Socket = GetItemForgeParam(Armor, 1)
+Socket = TansferNum(Socket)
+Socket = SetNum_Part1(Socket, Sockets)
+SetItemForgeParam(Armor, 1, Socket)
+RefreshCha(ForgedPlayer)
+end

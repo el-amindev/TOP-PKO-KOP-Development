@@ -1,0 +1,137 @@
+function ValentinesRingJudge(role)
+local Ring_Num = 0
+local t = {} -- Calling all teammates pointers
+t[0] = role
+t[1] = GetTeamCha(role, 0 )
+t[2] = GetTeamCha(role, 1 )
+t[3] = GetTeamCha(role, 2 )
+t[4] = GetTeamCha(role, 3 )
+local t_Num = {} --Record the number of all teammates who have ring
+t_Num[0] = 0
+t_Num[1] = 0
+t_Num[2] = 0
+t_Num[3] = 0
+t_Num[4] = 0
+local i = 1
+for i = 1 , 4, 1 do
+if t[i] ~= nil then
+local Ring_Num_Add = CheckBagItem(  t[i] , 2521 )
+if Ring_Num_Add == 1 then
+ 
+local retbag = HasLeaveBagGrid(  t[i], 1)
+if retbag ~= LUA_TRUE then
+SystemNotice(role,"Your Sweethearts Inventory is full!")
+SystemNotice(t[i],"You need at least 1 free slot!")
+return LUA_FALSE
+end
+local NocLock =KitbagLock( t[i], 0 )
+if NocLock == LUA_FALSE then
+SystemNotice( role , "Your Sweethearts Inventory is full!")
+SystemNotice( t[i] , "You need at least 1 free slot!")
+return LUA_FALSE
+end
+ 
+t_Num[i] = 1 --If there are rings, the value is set to 1, for the judge to do with the back
+Ring_Num = Ring_Num + Ring_Num_Add --The team recorded the total number of rings for the judge to do with the back
+local USED_Ring_Num = CheckBagItem(  t[i] , 2520 ) --To determine whether this team-mate who has been bound ring
+if USED_Ring_Num >= 1 then
+SystemNotice(role,"Your Team mate is already married!")
+SystemNotice(t[i],"You can only marry once! Get divorced!")
+return LUA_FALSE
+end
+end
+end
+end
+ 
+if Ring_Num == 1 then --If the team a total of a ring on the task of this man and then the person with
+return LUA_TRUE
+elseif Ring_Num > 1 then
+SystemNotice(role,"You need one Valentines Day Ring!")
+return LUA_FALSE
+else
+SystemNotice(role,"Please find someone to marry first!")
+return LUA_FALSE
+end
+end
+-----Valentine's Day ring record information
+function ValentinesRing(role)
+local Ring_Num = 0
+local t = {} --Pointer to call the various teammates
+t[0] = role
+t[1] = GetTeamCha(role, 0 )
+t[2] = GetTeamCha(role, 1 )
+t[3] = GetTeamCha(role, 2 )
+t[4] = GetTeamCha(role, 3 )
+local t_Num = {} --Record the number of all teammates who ring
+t_Num[0] = 0
+t_Num[1] = 0
+t_Num[2] = 0
+t_Num[3] = 0
+t_Num[4] = 0
+local i = 1
+for i = 1 , 4, 1 do
+if t[i] ~= nil then
+local Ring_Num_Add = CheckBagItem(  t[i] , 2521 )
+if Ring_Num_Add == 1 then
+t_Num[i] = 1 --If there are rings, the value is set to 1, for the judge to do with the back
+Ring_Num = Ring_Num + Ring_Num_Add --The team recorded the total number of rings for the judge to do with the back
+local USED_Ring_Num = CheckBagItem(  t[i] , 2520 ) --To determine whether this team-mate who has been bound ring
+if USED_Ring_Num >= 1 then
+SystemNotice(role,"Your team-mate is already married!")
+SystemNotice(t[i],"You can marry only once! Get divorced!")
+return LUA_FALSE
+end
+end
+end
+end
+ 
+if Ring_Num == 1 then --If the team a total of a ring on the task of this man and then the person with
+local i = 1
+for i = 1 , 4 ,1 do
+if t_Num[i] == 1 then
+ 
+local RoleType = GetChaID(role)
+local TeamerType = GetChaID(t[i])
+if (RoleType<=2 and TeamerType>=3) or (RoleType>=3 and TeamerType<=2) then --Sex determination
+--Players will take over the task of information recorded in the other ring in the
+local ID_Num = GetRoleID(role) --Then the task to obtain the player's ID number, and record in the ring in the
+ 
+GiveItem ( t[i] , 0 , 2520  , 1 , 4  )
+local a = DelBagItem ( t[i] , 2521 , 1)
+ 
+local Item = GetChaItem2 ( t[i] , 2 , 2520 ) --Valentine's teammates made the right ring pointer
+ 
+local Num_JZ = GetItemForgeParam ( Item , 1 )
+Num_JZ = TansferNum ( Num_JZ )
+Num_JZ = ID_Num ---Scouring the role of ID numbers of information bits recorded
+SetItemForgeParam ( Item , 1 , Num_JZ )
+AddChaSkill ( t[i] , SK_QLZX, 1 , 1 , 0 )
+--The information recorded will be the right team-mate in the next task of the player's rings
+local ID_Num1 = GetRoleID(t[i]) --Get the right team-mate's ID number, and record in the ring in the
+ 
+GiveItem ( role , 0 , 2520  , 1 , 4  )
+local b = DelBagItem ( role , 2521 , 1)
+ 
+local Item1 = GetChaItem2 ( role , 2 , 2520 ) --Then the task to obtain the player's Valentine's Day ring pointer
+ 
+local Num_JZ1 = GetItemForgeParam ( Item1 , 1 )
+Num_JZ1 = TansferNum ( Num_JZ1 )
+Num_JZ1 = ID_Num1 ---Scouring the role of ID numbers of information bits recorded
+ 
+SetItemForgeParam ( Item1 , 1 , Num_JZ1 )
+AddChaSkill ( role , SK_QLZX, 1 , 1 , 0 )
+-- Notice("Get away")
+else
+SystemNotice(role,"Please note about your gender!")
+end
+end
+end
+return LUA_TRUE
+elseif Ring_Num > 1 then
+SystemNotice(role,"You can only marry one!")
+return LUA_FALSE
+else
+SystemNotice(role,"Please find someone to marry first!")
+return LUA_FALSE
+end
+end

@@ -1,0 +1,56 @@
+function SkillSp_TAME ( sklv )
+	local sp_reduce = 10
+	return sp_reduce
+end
+
+function SkillCooldown_TAME( sklv )
+	local Cooldown = 35000
+	return Cooldown
+end
+
+function Skill_TAME_Begin ( role , sklv )
+	local sp = Sp(role)
+	local sp_reduce = SkillSp_HLKJ ( sklv )
+	if sp - sp_reduce < 0 then
+	SkillUnable(role)
+	return
+end
+
+	Sp_Red (role , sp_reduce )
+end
+
+function Skill_TAME_End ( ATKER , DEFER , sklv )
+	local norm = Is_NormalMonster (DEFER)
+	if norm == 0 then
+	BickerNotice(ATKER,"You cannot use this skill on players!")
+	return 0
+
+	elseif norm == 1 then
+	local mob_id = GetChaID(DEFER)
+	if mob_id == 937 or mob_id == 938 or mob_id == 939 or mob_id == 940 or mob_id == 941 then
+	BickerNotice(ATKER,"You cannot tame this monster , Capture fails..")
+	return 0
+else
+	local hp_percent = math.ceil( (Hp (DEFER) / Mxhp (DEFER)) * 100)
+	local xx = math.random(1, 20)
+	if hp_percent > xx then
+	BickerNotice(ATKER,"Try to capture agian , Capture Failed...")
+	elseif hp_percent < xx then
+	BickerNotice(ATKER,"Capturing "..GetChaDefaultName(DEFER).." Success")
+	local MonsterID = GetChaID(DEFER)
+	local x1, y1 = GetChaPos(ATKER)
+	local mob = CreateCha(MonsterID, x1, y1, 145, 50)
+	SetChaHost(mob, ATKER)
+	SetChaAIType(mob, 13)
+	SetChaLifeTime(mob, 10000000)
+	local hp = Mxhp(ATKER)
+	local Health = Mxhp(DEFER)
+	hp_recover = 2 * Health
+	Hp_Endure_Dmg ( DEFER , hp_recover )
+	end
+end
+end
+end
+
+0496	Tame	1	-1,10	1,-1	1,-1	1,-1	-1	0	1	0	-1	-1	1	1	1	300	4	1	0	0	0	0	0	SkillSp_TAME	0	0	0	0	Skill_TAME_End	0	0	0	0	0	0	0	0	0	0	0	0	0	0	SkillCooldown_TAME	1	1	11	-1	40	-1	379	0	0	0,0	0,0	0	9	-1	0	0	-1	2	101	0	0	0	s0225.tga	0	0	Monster Skill	Monster Skill	0	0
+

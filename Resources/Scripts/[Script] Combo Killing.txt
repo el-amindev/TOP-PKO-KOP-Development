@@ -1,0 +1,125 @@
+Add this at the end of Exp_and_level.lua
+
+GetExp_New_original = GetExp_New
+GetExp_New = function (dead , atk)
+	GetExp_New_original(dead , atk  )
+	custom_GetExp_New(dead,atk)
+end
+
+-- ***********************************
+-- Kill Modes
+-- ***********************************
+function custom_GetExp_New(ignore, dead, atk)
+	local map_name = GetChaMapName (atk)
+	
+	if ValidCha(atk) == 0  then 
+		return 
+	end 
+	local a = Check_Combat_Mod(dead , atk ) 
+	-- Player kills Monster
+	if a == 1 then
+		PK_combo (atk,dead)	
+	end
+	-- Player kills Player
+	if a == 3 then
+		PK_combo (atk,dead)
+	end
+end
+
+function PK_combo (character,target)
+	local name = GetChaDefaultName(character)
+	-- Lets check if he already have a combo
+	if PlayerCombo[name] ~= nil then
+		-- Lets check if the last combo was less than 5 sec ago
+		local time_bonus = PlayerCombo[name].count
+		if time_bonus > 10 then
+			time_bonus = math.ceil(time_bonus / 3)
+		end
+		if time_bonus > 20 then
+			time_bonus = math.ceil(time_bonus / 7)
+		end
+		if time_bonus > 30 then
+			time_bonus = math.ceil(time_bonus / 10)
+		end
+		local combo_time = 3 + time_bonus
+		if PlayerCombo[name].last < combo_time then
+			-- Increase the Combo count
+			PlayerCombo[name].count = PlayerCombo[name].count + 1
+			PlayerCombo[name].last = 0
+			if PlayerCombo[name].count == 10 then
+				AddGold(character,1000)
+				Notice("["..name.."] breaks 10x Combo!")
+			end
+			if PlayerCombo[name].count == 30 then
+				Notice("["..name.."] the combonator!")
+			end
+			if PlayerCombo[name].count == 40 then
+				AddGold(character,10000)
+				Notice("["..name.."] is a comboholic!")
+			end
+			if PlayerCombo[name].count == 100 then
+				AddGold(character,50000)
+				Notice("["..name.."] wow combos don't end!")
+			end
+			if PlayerCombo[name].count == 200 then
+				AddGold(character,500000)
+				Notice("["..name.."] 200X COMBO!!! IMPOSSIBLE! you cheat!")
+			end
+			BickerNotice(character,PlayerCombo[name].count.."x Combo!")
+		else
+			-- Reset the Bonus
+			RemoveComboBonus(character)
+			local highest_combo = GetPlayerCustomData(character,"combo")
+			if highest_combo < PlayerCombo[name].count then
+				SetPlayerCustomData(character,"combo",PlayerCombo[name].count)
+			end
+			-- Reset the Combo
+			PlayerCombo[name] = nil
+		end
+	else
+		-- He has no combos yet we will add one!
+		PlayerCombo[name] = { last = 1, count = 1}
+	end
+end
+
+function PK_combo_timer (character)
+	local name = GetChaDefaultName(character)
+	-- Player has an active Combo
+	if PlayerCombo[name] ~= nil then
+		local time_bonus = PlayerCombo[name].count
+		if time_bonus > 10 then
+			time_bonus = math.ceil(time_bonus / 3)
+		end
+		if time_bonus > 20 then
+			time_bonus = math.ceil(time_bonus / 7)
+		end
+		if time_bonus > 30 then
+			time_bonus = math.ceil(time_bonus / 10)
+		end
+		local combo_time = 3 + time_bonus
+		if PlayerCombo[name].last > combo_time then
+			PlayerCombo[name] = nil
+		else
+			-- increase the timer
+			PlayerCombo[name].last = PlayerCombo[name].last + 1
+			-- add the Bonus
+			AddComboBonus(character,PlayerCombo[name].count)
+		end
+	else
+		RemoveComboBonus(character)
+	end
+end
+
+function AddComboBonus(character,amount)
+	-- Lets get the old States
+	SetCharaAttr(amount ,character , ATTR_STATEV_MSPD)
+	SetCharaAttr(amount ,character , ATTR_STATEV_ASPD)
+	ALLExAttrSet(character)
+end
+
+function RemoveComboBonus(character)
+	-- Lets get the old States
+	SetCharaAttr(0 ,character , ATTR_STATEV_MSPD)
+	SetCharaAttr(0 ,character , ATTR_STATEV_ASPD)
+	ALLExAttrSet(character)
+end

@@ -1,0 +1,71 @@
+Just a small script i made for ROSO's new year. It will play the effect of random fireworks on each player that is online. (If you want it to count npcs too, remove the "if(IsPlayer(role)==1) then") You can add whatever you want as prize also.
+
+I tested it and it goes by the time of the computer your server is hosted on.
+
+
+In Variable.lua
+
+
+    FireWorks = {}
+    FireWorks[1] = 839
+    FireWorks[2] = 838
+    FireWorks[3] = 366
+    FireWorks[4] = 369
+    FireWorks[5] = 363
+
+in cha_timer, or make your own function
+
+    local i = math.random(1,5)
+    local month = os.date ("%m")
+    local day = os.date ("%d")
+    local hour = os.date ("%H")
+    local minute = os.date ("%M")
+    local second = os.date ("%S")
+    local monthnum = tonumber(month)
+    local daynum = tonumber(day)
+    local minutenum = tonumber(minute)
+    local hournum = tonumber(hour)
+    local secondnum = tonumber(second)
+    if monthnum == 12 and daynum == 31 and hournum == 23 and minutenum == 59 then
+        if secondnum == 50 then
+            BickerNotice(role, "Countdown: 10!")
+        end
+        if secondnum == 51 then
+                BickerNotice(role, "Countdown: 9!")
+            end
+        if secondnum == 52 then
+                BickerNotice(role, "Countdown: 8!")
+                end
+        if secondnum == 53 then
+                BickerNotice(role, "Countdown: 7!")
+                end
+        if secondnum == 54 then
+                BickerNotice(role, "Countdown: 6!")
+                end
+        if secondnum == 55 then
+                BickerNotice(role, "Countdown: 5!")
+                end
+        if secondnum == 56 then
+                BickerNotice(role, "Countdown: 4!")
+                end
+        if secondnum == 57 then
+                BickerNotice(role, "Countdown: 3!")
+                end
+        if secondnum == 58 then
+                BickerNotice(role, "Countdown: 2!")
+                end
+        if secondnum == 59 then
+                BickerNotice(role, "Countdown: 1!")
+                end
+ 
+    end
+    if monthnum == 01 and daynum == 01 and hournum == 00 and minutenum == 00 then
+            if secondnum == 00 then           
+                BickerNotice(role, "HAPPY NEW YEARS TO ALL -insert server name- PLAYERS!!!! WOOT 2013!!")
+                if(IsPlayer(role)==1) then
+                    PlayEffect(role, FireWorks[i])
+                  GiveItem(role, 0, XXXX, xx, 4)
+                end
+   
+        end
+    end

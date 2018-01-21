@@ -1,0 +1,166 @@
+ ------------------------ 
+ -- Shion the Holy Father
+ ------------------------ 
+
+ function dina_talk10 () 
+
+ Talk (1, "Shion the Holy Father: My Saints have been imprisoned by the Abyss Lord. I am racking my brains to work out a way to save them. Young man, if you have not prepared and not yet been resolute to risk your life and help me out, please go back to Argent City. Only the strong can have this honor to challenge Abyss Lord. ") 
+ 
+ AddNpcMission (6214)---Rivival I 
+ AddNpcMission (6227)---Rivival II 
+ 
+ end 
+
+ --------------- 
+ -- Little Angel 
+ ---------------
+
+ function dina_talk11 () 
+
+ Talk (1, "Little Angel: I am waiting for you, my hero. If you have a [Revive Stone], you will be blessed by Athene and become much stronger.") 
+ Text (1, "I want to be blessed by Athene.", JumpPage, 2) 
+ Text (1, "I have no interest in being blessed by Athene.", CloseTalk) 
+ 
+ Talk (2, "Little Angel: Athene has been kept waiting for many years. You should make the wise decison to get blessed and be rebirth. Now what class you want to be?") 
+ Text (2, "I want to become a Crusader to uphold justice and peace", GetChaName1_born2, 1) 
+ Text (2, "I want to become a Champion and protect the innocent", GetChaName2_born2, 1) 
+ Text (2, "I want to become a Cleric and save people's lives", GetChaName5_born2, 1) 
+ Text (2, "I want to become a Voyager and set sail", GetChaName3_born2, 1) 
+ Text (2, "I want to become a Sharpshooter and and learn killing skills", GetChaName4_born2, 1) 
+ Text (2, "I want to become a Seal Master and defeat all of the BOSSES", GetChaName6_born2, 1) 
+ Text (2, "I need a moment to think.", CloseTalk) 
+ 
+ end  
+
+ ---------------- 
+ -- Mu 
+ ---------------- 
+
+ function dina_talk12 () 
+
+ Talk (1, "Mu: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6215)---Mu's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Aldebaran 
+ ---------------- 
+
+ function dina_talk13 () 
+
+ Talk (1, "Aldebaran: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6216)---Aldebaran's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Saga 
+ ---------------- 
+
+ function dina_talk14 () 
+
+ Talk (1, "Saga: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6217)---Saga's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Death Mask 
+ ---------------- 
+
+ function dina_talk15 () 
+
+ Talk (1, "Death Mask: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6218)---Death Mask's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Aeolia
+ ---------------- 
+
+ function dina_talk16 () 
+
+ Talk (1, "Aeolia: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6219)---Aeolia's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Shaka
+ ---------------- 
+
+ function dina_talk17 () 
+
+ Talk (1, "Shaka: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6220)---Shaka's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Dokho
+ ---------------- 
+
+ function dina_talk18 () 
+
+ Talk (1, "Dokho: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6221)---Dohko's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Milo 
+ ---------------- 
+
+ function dina_talk19 () 
+
+ Talk (1, "Milo: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6222)---Milo's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Aiolos
+ ---------------- 
+
+ function dina_talk20 () 
+
+ Talk (1, "Aiolos: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6223)---Aiolos's Mission 
+ 
+ end 
+
+ ----------------
+ -- Shura
+ ---------------- 
+
+ function dina_talk21 () 
+
+ Talk (1, "Shura: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6224)---Shura's Mission 
+ 
+ end 
+
+ ---------------- 
+ -- Camus
+ ---------------- 
+
+ function dina_talk22 () 
+
+ Talk (1, "Camus: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6225)---Camus's Mission 
+ 
+ end 
+
+ ----------------
+ -- Aphrodite
+ ---------------- 
+
+ function dina_talk23 () 
+
+ Talk (1, "Aphrodite: Awesome. How did you find me. I thought I had hidden myself well.") 
+ AddNpcMission (6226)---Aphrodite's Mission 
+ 
+ end 
+

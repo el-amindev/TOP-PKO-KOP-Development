@@ -1,0 +1,83 @@
+function ItemUse_Combine (role,Item)
+
+    local Slot1    = GetChaItem(role,2,0)
+    local Slot2    = GetChaItem(role,2,1)
+
+    local ItemID1    = GetItemID(Slot1)
+    local ItemID2    = GetItemID(Slot2)
+
+    local ItemType1 = GetItemType(Slot1)
+    local ItemType2 = GetItemType(Slot2)
+
+    if ItemType1 ~= 49 or ItemType2 ~= 49 then
+        if ItemType1 ~= 50 or ItemType2 ~= 50 then
+            SystemNotice( role , "Both 1st and 2nd Inventory slot must have Gem.")
+            UseItemFailed(role)
+            return
+        end
+    end
+
+    if ItemID1 ~= ItemID2 then
+        SystemNotice(role ,"Gems mismatch.")
+        UseItemFailed(role)
+        return
+    end
+
+    local Item1_Lv = Get_StoneLv(Slot1)
+    local Item2_Lv = Get_StoneLv(Slot2)
+
+    if Item1_Lv ~= Item2_Lv then
+        SystemNotice(role ,"Level of both gems does not match")
+        UseItemFailed(role)
+        return
+    end
+
+    local Gem = {}
+    local Gem_Num = 15
+    Gem[1] = {ID = 6817, MaxLv = 3}
+    Gem[2] = {ID = 6818, MaxLv = 5}
+    Gem[3] = {ID = 6819, MaxLv = 7}
+    Gem[4] = {ID = 6820, MaxLv = 3}
+    Gem[5] = {ID = 6821, MaxLv = 5}
+    Gem[6] = {ID = 6822, MaxLv = 7}
+    Gem[7] = {ID = 6823, MaxLv = 3}
+    Gem[8] = {ID = 6824, MaxLv = 5}
+    Gem[9] = {ID = 6825, MaxLv = 7}
+    Gem[10] = {ID = 6826, MaxLv = 3}
+    Gem[11] = {ID = 6827, MaxLv = 5}
+    Gem[12] = {ID = 6828, MaxLv = 7}
+    Gem[13] = {ID = 6829, MaxLv = 3}
+    Gem[14] = {ID = 6830, MaxLv = 5}
+    Gem[15] = {ID = 6831, MaxLv = 7}
+
+    for i = 1,Gem_Num do
+        if ItemID1 == Gem[i].ID or ItemID2 == Gem[i].ID then
+            if Item1_Lv >= Gem[i].MaxLv or Item2_Lv >= Gem[i].MaxLv then
+                SystemNotice(role ,"Gem Lv max.")
+                UseItemFailed(role)
+                return
+            end
+        end
+    end
+
+    if ItemType1 == 49 and ItemType2 == 49 then
+        if Item1_Lv >= 9 or Item2_Lv >= 9 then
+            SystemNotice ( role , "Gem reach max Level")
+            UseItemFailed(role)
+            return
+        end
+    end
+
+    if ItemType1 == 50 and ItemType2 == 50 then
+        if Item1_Lv >= 9 or Item2_Lv >= 9 then
+            SystemNotice ( role , "Refining Gems reach max Level")
+            UseItemFailed(role)
+            return
+        end
+    end
+
+    local Remove = RemoveChaItem(role,ItemID2,2,2,1,2,1)
+    local Lv_End = Item1_Lv + 1
+    SetItemAttr(Slot1,ITEMATTR_VAL_BaoshiLV,Lv_End)
+    SynChaKitbag(role,13)
+end

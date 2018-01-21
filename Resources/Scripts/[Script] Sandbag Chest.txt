@@ -1,0 +1,20 @@
+function ItemUse_sandbag ( role , Item )
+local Item_CanGet = GetChaFreeBagGridNum ( role )
+	 if Item_CanGet < 5 then
+		SystemNotice(role ,"Insufficient slots in inventory")
+		UseItemFailed ( role )
+		return
+	end
+        GiveItem ( role , 0 , 1145  , 1 , 4 )     
+	GiveItem ( role , 0 , 2729  , 1 , 4 )
+	GiveItem ( role , 0 , 2753  , 1 , 4 )
+	GiveItem ( role , 0 , 2777  , 1 , 4 )
+	GiveItem ( role , 0 , 2801  , 1 , 4 )
+        local cha_name = GetChaDefaultName ( role ) 
+	--local message = cha_name.." opens the Sandbag Chest!"
+		Notice ( message )
+end
+
+
+
+6050	Sand Bag Chest	n0322	10130015	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	1000	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_sandbag	0	0	0	0,0	0	0	Double Click To Obtain Sand Bags	0

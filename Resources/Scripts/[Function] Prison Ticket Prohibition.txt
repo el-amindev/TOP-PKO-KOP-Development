@@ -1,0 +1,6 @@
+local map_name = GetChaMapName(role)
+if map_name == "prisonisland" then
+  SystemNotice(role, "Can't use tickets in Prison Island")
+  UseItemFailed(role)
+  return
+end

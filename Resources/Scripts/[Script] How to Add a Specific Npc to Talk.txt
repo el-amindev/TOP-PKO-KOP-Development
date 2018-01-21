@@ -1,0 +1,22 @@
+Welcome PKODEV VIP! Thanks for buying VIP, and downloading this awesome Release!
+For the record, Walking NPC'S will be added in some weeks so stay tuned!
+Okay, so what to do is, put install.lua inside modules folder, and TalkingNPC also.
+to make specific npc's talk, use the NAME VARIABLE, so i'll make a example
+IF you want a NPC to talk put the name of the npc Name == "NPCNAME" I added 2 examples at the script, 
+1 with mob another with NPC. for mob, same thing put NAME == "MOBNAME"
+its not really hard. :P Hope you enjoy and MUCH more stuff to be released!
+
+-Danny(PKODEV ADMINISTRATOR)
+
+http://www.forum.pkodev.com
+
+
+
+use the if function. Modules>TalkingNPC>Init.lua
+Look for ChaSay(target,character,
+
+Before that add
+
+if(target ~= nil and name == "npc or mob name" and Rand(100) < 5 ) then
+ChaSay(target,character, "Welcome " ..playername.. " ! I hope you enjoy our Server!" )
+end 

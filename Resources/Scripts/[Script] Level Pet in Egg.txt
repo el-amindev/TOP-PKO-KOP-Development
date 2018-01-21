@@ -1,0 +1,111 @@
+-- AGI Egg
+function ItemUse_MJRagi( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_agi= 65
+local new_lv = 65
+local r1,r2 = MakeItem ( role , 500 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_AGI , new_agi )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end
+ 
+-- ACC Egg
+function ItemUse_MJRacc( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_dex= 65
+local new_lv = 65
+local r1,r2 = MakeItem ( role , 500 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_DEX , new_dex )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end
+ 
+-- STR Egg
+function ItemUse_MJRstr( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_str= 65
+local new_lv = 65
+local r1,r2 = MakeItem ( role , 500 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_STR , new_str )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end
+ 
+-- CON Egg
+function ItemUse_MJRcon( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_con = 65
+local new_lv = 65
+local r1,r2 = MakeItem ( role , 500 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_CON , new_con )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end
+ 
+-- SPR Egg
+function ItemUse_MJRspr( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_sta= 65
+local new_lv = 65
+local r1,r2 = MakeItem ( role , 500 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_STA , new_sta )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end
+
+
+####	Lv50 Egg of Mordo Junior Strength	n0323	10130005	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	0	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_MJRstr	0	0	0	0,0	0	0	Double click to obtain Level 50 Mordo Junior Strength.	0
+####	Lv50 Egg of Mordo Junior Constitution	n0323	10130005	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	0	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_MJRcon	0	0	0	0,0	0	0	Double click to obtain Level 50 Mordo Junior Constitution.	0
+####	Lv50 Egg of Mordo Junior Spirit	n0323	10130005	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	0	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_MJRspr	0	0	0	0,0	0	0	Double click to obtain Level 50 Mordo Junior Spirit.	0
+####	Lv50 Egg of Mordo Junior Accuracy	n0323	10130005	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	0	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_MJRacc	0	0	0	0,0	0	0	Double click to obtain Level 50 Mordo Junior Accuracy.	0
+####	Lv50 Egg of Mordo Junior Agility	n0323	10130005	0	0	0	0	0	0	31	0	0	0	0	0	1	1	1	1	99	0	0	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_MJRagi	0	0	0	0,0	0	0	Double click to obtain Level 50 Mordo Junior Agility.	0

@@ -1,0 +1,27 @@
+function ItemUse_Mixpet ( role , Item )
+    local Item_CanGet = GetChaFreeBagGridNum ( role ) 
+    if Item_CanGet <= 1 then
+        SystemNotice(role ,"Insufficient slot in inventory. Failed to use!")
+        UseItemFailed ( role )
+        return
+    end
+local new_str= 1000
+local new_con= 1000
+local new_acc= 1000
+local new_agi= 1000
+local new_spr= 1000
+local new_lv = 5000
+local r1,r2 = MakeItem ( role , 681 , 1 , 4 )
+local Item_newJL = GetChaItem ( role , 2 , r2 )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_STR , new_str )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_CON , new_con )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_DEX , new_acc )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_AGI , new_agi )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_STA , new_spr )
+SetItemAttr ( Item_newJL , ITEMATTR_VAL_LV , new_lv )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXURE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_URE , 32000 )
+SetItemAttr ( Item_newJL , ITEMATTR_MAXENERGY , 6480 )
+SetItemAttr ( Item_newJL , ITEMATTR_ENERGY , 6480 )
+RefreshCha(role)
+end

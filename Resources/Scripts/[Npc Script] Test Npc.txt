@@ -1,0 +1,46 @@
+function test_1 ()
+	
+	
+	Talk( 1, "Test NPC: Hello, I am the Test NPC. I will sell you all the items that are unavalaible In-Game." )
+	Text( 1, "Trade", BuyPage )
+	
+	InitTrade()
+	Weapon(	319	) 
+	Weapon(	1014	)
+	Weapon(	2381	)
+	Weapon(	2888	)
+	Weapon(	2889	)
+	Weapon(	2890	) 
+	Weapon(	2891	)
+	Weapon(	2900	)
+	Weapon(	3012	)
+	Weapon(	3013	) 
+	Weapon(	3014	)
+	Weapon(	3015	)
+	Weapon(	3016	)
+	Weapon(	6294	)
+	Weapon(	6295	) 
+	Weapon(	6296	)
+	Weapon(	6297	)
+	Weapon(	6298	)
+	Weapon(	6299	)
+	Weapon(	6300	)
+	Weapon(	6301	)
+	Weapon(	6302	)
+	Weapon(	6303	)
+	Weapon(	6304	)
+	Weapon(	6305	)
+	Weapon(	7228	)
+	Weapon(	7229	)
+	Weapon(	7230	)
+	Weapon(	7231	)
+	Weapon(	7232	)
+	Weapon(	3422	)
+	Weapon(	3423	)
+	Weapon(	3424	)
+	Weapon(	3458	)
+	
+
+end
+
+//197	Test NPC	        1	419	0	223250,278419	223250,278419	180	Argent City	8	0	test_1	0

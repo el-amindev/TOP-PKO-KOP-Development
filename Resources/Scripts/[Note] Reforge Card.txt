@@ -1,0 +1,64 @@
+7500    Reforge Card    n0386    n0386    10130005    0    0    0    0    0    0    41    0    0    0    0    0    1    1    1    1    99    0    50000000    -1,-2,-2,-2    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    -1,-2,-2,-2,-2,-2,-2,-2,-2,-2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0,0    0    0,0    0,0    0    0    0    0    0    0    0    0    0    ItemUse_Gem_Transfer    0    0    0    0,0    0    0    Place the forged Equip in 3rd slot and the equip to be reforged on 4th Slot.    0
+
+function ItemUse_Gem_Transfer ( role , Item )
+ 
+    local Item_One = GetChaItem ( role , 2 , 2  )
+    local NumOne = GetItemForgeParam ( Item_One , 1 )
+    local Item_Two = GetChaItem ( role , 2 , 3  )
+    local NumTwo = GetItemForgeParam ( Item_Two , 1 )
+    local ItemType_One = GetItemType ( Item_One )
+    local ItemType_Two = GetItemType ( Item_Two )
+    local star=0
+    if ItemType_One ~= 22 and ItemType_Two ~=27 then
+    star = 1
+    end
+    if ItemType_Two~=27  then
+        if ItemType_One ~= ItemType_Two then
+        SystemNotice( role ,"Type of Equipments dont match!" )
+        return 0
+        end
+    elseif ItemType_Two==27 and star == 1 then
+        SystemNotice( role ,"Type of Equipments dont match!" )
+        return 0
+    end
+ 
+    local i = 0
+    NumOne = TansferNum ( NumOne )
+    NumTwo = TansferNum ( NumTwo )
+    NumOne = SetNum_Part1 ( NumOne , 3 )
+    i = SetItemForgeParam ( Item_One , 1 , NumOne )
+    NumTwo = SetNum_Part1 ( NumTwo , 3 )
+    i = SetItemForgeParam ( Item_Two , 1 , NumTwo )
+ 
+    local ItemOne_Stone = {}
+    local ItemOne_StoneLv = {}
+    local ItemOne_StoneID = {}
+ 
+    ItemOne_Stone[0] = GetNum_Part2 ( NumOne )
+    ItemOne_Stone[1] = GetNum_Part4 ( NumOne )
+    ItemOne_Stone[2] = GetNum_Part6 ( NumOne )
+    ItemOne_StoneLv[0] = GetNum_Part3 ( NumOne )
+    ItemOne_StoneLv[1] = GetNum_Part5 ( NumOne )
+    ItemOne_StoneLv[2] = GetNum_Part7 ( NumOne )
+    ItemOne_StoneID[0] = StoneTpye_ID[ItemOne_Stone[0]]
+    ItemOne_StoneID[1] = StoneTpye_ID[ItemOne_Stone[1]]
+    ItemOne_StoneID[2] = StoneTpye_ID[ItemOne_Stone[2]]
+ 
+    NumTwo = SetNum_Part2 ( NumTwo , ItemOne_Stone[0] )
+    NumTwo = SetNum_Part3 ( NumTwo , ItemOne_StoneLv[0] )
+    NumTwo = SetNum_Part4 ( NumTwo , ItemOne_Stone[1] )
+    NumTwo = SetNum_Part5 ( NumTwo , ItemOne_StoneLv[1] )
+    NumTwo = SetNum_Part6 ( NumTwo , ItemOne_Stone[2] )
+    NumTwo = SetNum_Part7 ( NumTwo , ItemOne_StoneLv[2] )
+    SetItemForgeParam ( Item_Two , 1 , NumTwo )
+ 
+    NumOne = SetNum_Part2 ( NumOne , 0 )
+    NumOne = SetNum_Part3 ( NumOne , 0 )
+    NumOne = SetNum_Part4 ( NumOne , 0 )
+    NumOne = SetNum_Part5 ( NumOne , 0 )
+    NumOne = SetNum_Part6 ( NumOne , 0 )
+    NumOne = SetNum_Part7 ( NumOne , 0 )
+    SetItemForgeParam ( Item_One , 1 , NumOne )
+ 
+        SystemNotice( role ,"Reforge Successful!" )
+end

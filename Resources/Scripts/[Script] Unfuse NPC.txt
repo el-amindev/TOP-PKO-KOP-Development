@@ -1,0 +1,53 @@
+unfuse npc, I did this a few months ago when I was bored.
+
+and in npcsdk.lua add in function MsgProc.
+
+
+elseif item.func == UnfuseNpc then
+			return UnfuseNpc(character)
+
+
+function UnfuseNpc(role)
+local Apparel = GetChaItem(role,2,3)
+local ApparelID = GetItemID(Apparel)
+local MainApparelID = ApparelID
+if Apparel == nil then
+HelpInfo(role,0,"You must put a fused equippment on your 4th Inventory Slot.")
+return
+end
+
+if MainApparelID > 5000 then
+MainApparelID = GetItemAttr(Apparel,ITEMATTR_VAL_FUSIONID)
+else
+HelpInfo(role,0,"Your equippment is not fused in any apparel.")
+return
+end
+
+local ApparelFusedID = GetItemAttr(Apparel,ITEMATTR_VAL_FUSIONID)
+if ApparelFusedID == 0 then
+HelpInfo(role,0,"Your apparel is not fused in any equippment.")
+return
+end
+
+local EquipGems = GetItemForgeParam(Apparel,1)
+local r1 = 0
+local r2 = 0
+r1,r2 = MakeItem(role,MainApparelID,1,18)
+GiveItem(role,0,ApparelID,1,1)
+local Remove = 0
+Remove = RemoveChaItem(role,MainApparelID,2,2,3,2,1)
+if Remove == 0 then
+HelpInfo(role,0,"Delete main item failed.")
+return
+end
+
+local NewEquip = GetChaItem(role,2,r2)
+local ParanTransfered = SetItemForgeParam(NewEquip,1,EquipGems)
+if ParanTransfered == 0 then
+HelpInfo(role,0,"Failed to set forging attribute settings.")
+return
+else
+HelpInfo(role,0,"Apparel unfused sucessful!")
+RefreshCha(role)
+end
+end

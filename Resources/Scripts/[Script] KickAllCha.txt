@@ -1,0 +1,22 @@
+--Please Put the Following Function into functions.lua at the end:
+
+function KickCha(character)
+	local pkt = GetPacket()
+	WriteCmd(pkt,1505)
+	SendPacket(character,pkt)
+end
+
+-- Please put the following Varaible into Variables.lua at the end
+
+KickAllPlayers = false
+
+
+-- Please put the following snippet at the begining of cha_timer function in functions.lua:
+
+if(KickAllPlayers == true)then
+	KickCha(role)
+end
+
+-- Command to kick is:
+
+&lua_all KickAllPlayers = true

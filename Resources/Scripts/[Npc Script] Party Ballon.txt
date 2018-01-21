@@ -1,0 +1,117 @@
+function money_make01()
+	Talk( 1, "Event NPC - Pappa: You can learn all kinds of on-going events of Elysium from me. Select the topic you interested in from followed list, you will see the brief introduction of the event.Pay attention to the offical site http://kingofdeath.com for more detail.")
+	Text( 1, "Alphabet Card Exchange" ,JumpPage, 2 )
+
+--	InitTrigger()
+--	TriggerCondition( 1, HasRecord, 1007 )
+--	TriggerAction( 1, ClearRecord, 1000 )
+--	TriggerAction( 1, ClearRecord, 1001 )
+--	TriggerAction( 1, ClearRecord, 1002 )
+--	TriggerAction( 1, ClearRecord, 1003 )
+--	TriggerAction( 1, ClearRecord, 1004 )
+--	TriggerAction( 1, ClearRecord, 1005 )
+--	TriggerAction( 1, ClearRecord, 1006 )
+--	TriggerAction( 1, ClearRecord, 1007 )
+--	TriggerAction( 1, JumpPage, 20)
+--	TriggerFailure( 1, JumpPage, 21)
+--	Text( 1, "Start challenge again" ,MultiTrigger, GetMultiTrigger(), 1)
+
+	Text( 1, "Nothing...",  CloseTalk)
+
+
+	Talk( 2, "Event NPC - Pappa: You need to match the following words and exchange it for your prizes. You can exchange your prizes as many time as you want. All letters can be droped from monsters and also be aquired at the Legendary Tree of Fortune. I hope you all enjoy the event until it lasts!" )
+	Text( 2, "Hero", JumpPage, 3 )
+	Text( 2, "Saint", JumpPage, 4 )
+	Text( 2, "Priest", JumpPage, 5 )
+	Text( 2, "Legend", JumpPage, 6 )
+
+
+	InitTrigger()
+--	TriggerCondition( 1, CheckZMKTime )
+	TriggerCondition( 1, HasItem, 3857, 1 )--Card H
+	TriggerCondition( 1, HasItem, 3854, 1 )--Card E
+	TriggerCondition( 1, HasItem, 3867, 1 )--Card R
+	TriggerCondition( 1, HasItem, 3864, 1 )--Card O
+	TriggerAction( 1, TakeItem,   3857, 1 )--Card H
+	TriggerAction( 1, TakeItem,   3854, 1 )--Card E
+	TriggerAction( 1, TakeItem,   3867, 1 )--Card R
+	TriggerAction( 1, TakeItem,   3864, 1 )--Card O
+	TriggerAction( 1, AddMoney, 5000000)
+	TriggerFailure( 1, JumpPage, 19 )
+	Talk( 3, "Event NPC - Pappa: The Hero combination awards you with 5.000.000g")
+	Text( 3, "Confirm to redeem", MultiTrigger, GetMultiTrigger(), 1)
+	Text( 3, "Go back", JumpPage, 2 )
+
+
+	InitTrigger()
+--	TriggerCondition( 1, CheckZMKTime )
+	TriggerCondition( 1, HasItem, 3868, 1 )--Card S
+	TriggerCondition( 1, HasItem, 3850, 1 )--Card A
+	TriggerCondition( 1, HasItem, 3858, 1 )--Card I
+	TriggerCondition( 1, HasItem, 3863, 1 )--Card N
+	TriggerCondition( 1, HasItem, 3869, 1 )--Card T
+	TriggerAction( 1, TakeItem,   3868, 1 )--Card S
+	TriggerAction( 1, TakeItem,   3850, 1 )--Card A
+	TriggerAction( 1, TakeItem,   3858, 1 )--Card I
+	TriggerAction( 1, TakeItem,   3863, 1 )--Card N
+	TriggerAction( 1, TakeItem,   3869, 1 )--Card T
+	TriggerAction( 1, AddMoney, 10000000)
+	TriggerFailure( 1, JumpPage, 19 )
+	Talk( 4, "Event NPC - Pappa: The Saint combination awards you with 10.000.000g")
+	Text( 4, "Confirm to redeem", MultiTrigger, GetMultiTrigger(), 1)
+	Text( 4, "Go back", JumpPage, 2 )
+
+
+	InitTrigger()
+--	TriggerCondition( 1, CheckZMKTime )
+	TriggerCondition( 1, HasItem, 3865, 1 )--Card P
+	TriggerCondition( 1, HasItem, 3867, 1 )--Card R
+	TriggerCondition( 1, HasItem, 3858, 1 )--Card I
+	TriggerCondition( 1, HasItem, 3854, 1 )--Card E
+	TriggerCondition( 1, HasItem, 3868, 1 )--Card S
+	TriggerCondition( 1, HasItem, 3869, 1 )--Card T
+	TriggerAction( 1, TakeItem,   3865, 1 )--Card P
+	TriggerAction( 1, TakeItem,   3867, 1 )--Card R
+	TriggerAction( 1, TakeItem,   3858, 1 )--Card I
+	TriggerAction( 1, TakeItem,   3854, 1 )--Card E
+	TriggerAction( 1, TakeItem,   3868, 1 )--Card S
+	TriggerAction( 1, TakeItem,   3869, 1 )--Card T
+	TriggerAction( 1, AddMoney, 15000000)
+	TriggerAction( 1, GiveItem, 1028, 1, 1 )--Morph Runestone
+	TriggerFailure( 1, JumpPage, 19 )
+	Talk( 5, "Event NPC - Pappa: The Priest combination awards you with 15.000.000g and a Morph Runestone")
+	Text( 5, "Confirm to redeem", MultiTrigger, GetMultiTrigger(), 1)
+	Text( 5, "Go back", JumpPage, 2 )
+
+
+	InitTrigger()
+--	TriggerCondition( 1, CheckZMKTime )
+	TriggerCondition( 1, HasItem, 3861, 1 )--Card L
+	TriggerCondition( 1, HasItem, 3854, 1 )--Card E
+	TriggerCondition( 1, HasItem, 3856, 1 )--Card G
+	TriggerCondition( 1, HasItem, 3854, 1 )--Card E
+	TriggerCondition( 1, HasItem, 3863, 1 )--Card N
+	TriggerCondition( 1, HasItem, 3853, 1 )--Card D
+	TriggerAction( 1, TakeItem,   3861, 1 )--Card L
+	TriggerAction( 1, TakeItem,   3854, 1 )--Card E
+	TriggerAction( 1, TakeItem,   3856, 1 )--Card G
+	TriggerAction( 1, TakeItem,   3854, 1 )--Card E
+	TriggerAction( 1, TakeItem,   3863, 1 )--Card N
+	TriggerAction( 1, TakeItem,   3853, 1 )--Card D
+	TriggerAction( 1, AddMoney, 20000000)
+	TriggerAction( 1, GiveItem, 1028, 1, 1 )--Morph Runestone
+	TriggerFailure( 1, JumpPage, 19 )
+	Talk( 6, "Event NPC - Pappa: The Priest combination awards you with 20.000.000g and a Morph Runestone")
+	Text( 6, "Confirm to redeem", MultiTrigger, GetMultiTrigger(), 1)
+	Text( 6, "Go back", JumpPage, 2 )
+
+
+	Talk( 19, "Event NPC - Pappa: Do you have enough Cards on you? Please check if your inventory is binded.")
+	Talk( 20, "You can take the challenge of Hexathlon again now!")
+	Talk( 21, "you can do the challenge now.please don't joke with me.i'm busy now.")
+
+	-----Ã˙»À¡˘œÓ
+
+	AddNpcMission ( 6114 )--First Task (HEX)
+
+end

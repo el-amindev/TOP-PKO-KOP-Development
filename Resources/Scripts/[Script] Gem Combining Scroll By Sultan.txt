@@ -1,0 +1,49 @@
+####	Gem Combining Scroll	n0347	10130005	0	0	0	0	0	0	60	0	0	0	0	0	1	1	0	1	99	0	10000	-1,-2,-2,-2	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	-1,-2,-2,-2,-2,-2,-2,-2,-2,-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0,0	0	0,0	0,0	0	0	0	0	0	0	0	0	0	ItemUse_CombineScroll	0	0	0	0,0	0	0	Place your gems that you wish to combine on 3rd and 4th Inventory Slot and double click on this scroll to start combining your gems! - Created by Sultan	0
+
+
+CombineScroll = {}
+function ItemUse_CombineScroll(role,Item)
+local CharacterName = GetChaDefaultName(role)
+local FirstGem = GetChaItem(role,2,2)
+local SecondGem = GetChaItem(role,2,3)
+local FirstGemID = GetItemID(FirstGem)
+local SecondGemID = GetItemID(SecondGem)
+local FirstGemLv = Get_StoneLv(FirstGem)
+local SecondGemLv = Get_StoneLv(SecondGem)
+local TotalGemLv = Get_StoneLv(FirstGem)
+local FirstGemItemType = GetItemType(FirstGem)
+local SecondGemItemType = GetItemType(SecondGem)
+ 
+if CombineScroll[CharacterName] == nil then
+CombineScroll[CharacterName] = { GemLv = 0, GemAttr = 0 }
+end
+ 
+if FirstGemItemType ~= 49 or SecondGemItemType ~= 49 then
+if FirstGemItemType ~= 50 or SecondGemItemType ~= 50 then
+SystemNotice( role , "Please insert gems on your 3rd and 4th Inventory Slot!")
+UseItemFailed ( role )
+return
+end
+end
+ 
+if FirstGemID ~= SecondGemID then
+SystemNotice( role ,"Gem's inserted on 3rd and 4th Inventory Slot doesn't match!")
+UseItemFailed ( role )
+return
+end
+ 
+if FirstGemLv ~= SecondGemLv then
+SystemNotice( role ,"Gem's inserted on 3rd and 4th Inventory Slot are not same levels!")
+UseItemFailed ( role )
+return
+end
+ 
+CombineScroll[CharacterName].GemLv = FirstGemLv + 1
+CombineScroll[CharacterName].GemAttr = CombineScroll[CharacterName].GemLv + 100
+GiveItem(role,0,FirstGemID,1,CombineScroll[CharacterName].GemAttr)
+Notice(CharacterName.." used Gem Combining Scroll to combine and obtained Lv"..(FirstGemLv+1).." "..GetItemName(FirstGemID).."!")
+LG("Gem Combining Scroll", CharacterName.." used Gem Combining Scroll to combine and obtained Lv"..(FirstGemLv+1).." "..GetItemName(FirstGemID).."!")
+RemoveChaItem(role,FirstGemID,2,2,2,2,1)
+RemoveChaItem(role,SecondGemID,2,2,3,2,1)
+CombineScroll[CharacterName] = nil
+end

@@ -1,0 +1,327 @@
+Functions.lua
+
+
+-- improved fruit
+ 
+function Lvup_Str_4 ( role , Item_Num ,Item_Traget )
+        local attr_type =  ITEMATTR_VAL_STR
+        --SystemNotice(role ,attr_type )
+        Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )
+end
+ 
+function Lvup_Con_4 ( role , Item_Num ,Item_Traget )
+        local attr_type =  ITEMATTR_VAL_CON
+        Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )
+end
+ 
+function Lvup_Agi_4 ( role , Item_Num ,Item_Traget )
+        local attr_type = ITEMATTR_VAL_AGI
+        Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )
+end
+ 
+function Lvup_Dex_4 ( role , Item_Num ,Item_Traget )
+        local attr_type = ITEMATTR_VAL_DEX
+        Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )
+end
+ 
+function Lvup_Sta_4 ( role , Item_Num ,Item_Traget )
+        local attr_type = ITEMATTR_VAL_STA
+        Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )
+end
+ 
+function Elf_LvUp_4 ( role , Item_Num , Item_Traget , attr_type )      
+                
+        local str = GetItemAttr( Item_Traget ,ITEMATTR_VAL_STR )        
+        local con = GetItemAttr( Item_Traget ,ITEMATTR_VAL_CON )        
+        local agi = GetItemAttr( Item_Traget ,ITEMATTR_VAL_AGI )        
+        local dex = GetItemAttr( Item_Traget ,ITEMATTR_VAL_DEX )      
+        local sta = GetItemAttr( Item_Traget ,ITEMATTR_VAL_STA )      
+        local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+        local Elf_MaxURE = GetItemAttr(Item_Traget,ITEMATTR_MAXURE)
+ 
+        local Lv = str + agi + dex + con + sta
+        local attr_type_num = GetItemAttr( Item_Traget ,attr_type )
+ 
+        local a = 1 / ( math.floor ( ( 1 + ( math.pow ( ( Lv / 10 ) , 3 ) ) ) * 10 ) / 10 * math.max ( 0.01 ,( 1 - attr_type_num * 0.05 ) ) )
+        
+        if Lv >= 50 then
+                a = 1 / ( math.floor ( ( 1 + ( math.pow ( ( Lv / 10 ) , 3 ) ) ) * 10 ) / 10 ) * math.max ( 0.01 ,( 1 - attr_type_num * 0.05 ) )
+        end
+        
+        local b = Percentage_Random ( a )
+        
+                local item_energe = GetItemAttr( Item_Traget ,ITEMATTR_ENERGY )
+              
+        if b == 1 then                                          
+                        AddItemEffect(role , Item_Traget , 0  )
+                item_energe = 0
+                SystemNotice (role , "Pet level up successfully! Growth rate is depleted")      
+                
+                                attr_type_num = attr_type_num + 1
+                SetItemAttr ( Item_Traget , attr_type , attr_type_num )
+ 
+                local Item_MAXENERGY = 240 * ( Lv + 1 )
+                
+                if Item_MAXENERGY > 6480 then
+                        Item_MAXENERGY = 6480
+                end
+ 
+ 
+                local Item_MAXURE_NUM = Elf_MaxURE + 2000
+ 
+                if Item_MAXURE_NUM > 32000 then
+                        Item_MAXURE_NUM = 32000
+                end
+                
+                SetItemAttr ( Item_Traget , ITEMATTR_MAXENERGY , Item_MAXENERGY )
+                SetItemAttr ( Item_Traget , ITEMATTR_MAXURE , Item_MAXURE_NUM )
+                ResetItemFinalAttr(Item_Traget)
+                        AddItemEffect(role , Item_Traget , 1  )
+        else                                                  
+                item_energe = 0.5 * item_energe
+                SystemNotice (role , "Pet level up failed! Growth rate reduced by half")        
+        end
+                SetItemAttr ( Item_Traget , ITEMATTR_ENERGY , item_energe )
+ 
+ 
+end
+ 
+function CheckJingLingLv2 ( role , Item_Traget)
+                local ItemID = GetItemID ( Item_Traget )
+                local str_Traget = GetItemAttr( Item_Traget ,ITEMATTR_VAL_STR )          --Strenght
+                local con_Traget = GetItemAttr( Item_Traget ,ITEMATTR_VAL_CON )          --Constitution
+                local agi_Traget = GetItemAttr( Item_Traget ,ITEMATTR_VAL_AGI )          --Agility
+                local dex_Traget = GetItemAttr( Item_Traget ,ITEMATTR_VAL_DEX )          --Accuracy
+                local sta_Traget = GetItemAttr( Item_Traget ,ITEMATTR_VAL_STA )          --Spirit
+                local lv_Traget = str_Traget + con_Traget + agi_Traget + dex_Traget + sta_Traget  --Stat to add for a lv
+                if lv_Traget < 42 then
+                        return 0
+                else
+                        return 1
+        
+                end
+		if lv_Traget > 50 then
+                        return 0
+                else
+                        return 1
+        
+                end
+ 
+end
+
+
+
+
+
+
+ItemEffect.lua:
+
+
+
+
+function ItemUse_Great_Strup ( role , Item , Item_Traget )
+local ret = CheckJingLingLv2( role , Item_Traget )
+if ret == 0 then
+SystemNotice ( role , "Fairy Lv lower than 42. Unable to use Improved Strenght Fruit")
+UseItemFailed ( role )
+return
+end
+local Cha_Boat = 0
+Cha_Boat = GetCtrlBoat ( role )
+if Cha_Boat ~= nil then
+SystemNotice( role , "Cannot use while sailing" )
+UseItemFailed ( role )
+return
+end
+local Item_type = GetItemType ( Item )
+local Item_Traget_Type = GetItemType ( Item_Traget )
+local Item_Num = GetItemID ( Item )
+local Check_Exp = 0
+local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+local Item_Target_ID = GetItemID ( Item_Traget )
+local Pet_Slot = GetChaItem ( role , 2 , 1  )
+local Pet_ID = GetItemID ( Pet_Slot )
+ 
+if Item_Target_ID ~= Pet_ID then
+SystemNotice(role , "Pet must be in the Pet Slot" )
+UseItemFailed ( role )
+return
+end
+ 
+  local Item_bg = GetChaItem ( role , 2 , 1  )
+if Item_type == 58 and Item_Traget_Type == 59 then
+Check_Exp = CheckElf_EXP ( role , Item_Traget )
+if Check_Exp == 0 then
+SystemNotice(role , "Growth rate is not full. Unable to feed pet with Improved Strenght Fruit" )
+UseItemFailed ( role )
+else
+Lvup_Str_4 ( role , Item_Num , Item_Traget )
+end
+end
+end
+ 
+function ItemUse_Great_Agiup ( role , Item , Item_Traget )
+local ret = CheckJingLingLv2( role , Item_Traget )
+if ret == 0 then
+SystemNotice ( role , "Fairy Lv lower than 42. Unable to use Improved Agility Fruit")
+UseItemFailed ( role )
+return
+end
+local Cha_Boat = 0
+Cha_Boat = GetCtrlBoat ( role )
+if Cha_Boat ~= nil then
+SystemNotice( role , "Cannot use while sailing" )
+UseItemFailed ( role )
+return
+end
+local Item_type = GetItemType ( Item )
+local Item_Traget_Type = GetItemType ( Item_Traget )
+local Item_Num = GetItemID ( Item )
+local Check_Exp = 0
+local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+local Item_Target_ID = GetItemID ( Item_Traget )
+local Pet_Slot = GetChaItem ( role , 2 , 1  )
+local Pet_ID = GetItemID ( Pet_Slot )
+ 
+if Item_Target_ID ~= Pet_ID then
+SystemNotice(role , "Pet must be in the Pet Slot" )
+UseItemFailed ( role )
+return
+end
+ 
+  local Item_bg = GetChaItem ( role , 2 , 1  )
+if Item_type == 58 and Item_Traget_Type == 59 then
+Check_Exp = CheckElf_EXP ( role , Item_Traget )
+if Check_Exp == 0 then
+SystemNotice(role , "Growth rate is not full. Unable to feed pet with Improved Agility Fruit" )
+UseItemFailed ( role )
+else
+Lvup_Agi_4 ( role , Item_Num , Item_Traget )
+end
+end
+end
+ 
+ 
+function ItemUse_Great_Dexup ( role , Item , Item_Traget )
+local ret = CheckJingLingLv2( role , Item_Traget )
+if ret == 0 then
+SystemNotice ( role , "Fairy Lv lower than 42. Unable to use Improved Accuracy Fruit")
+UseItemFailed ( role )
+return
+end
+local Cha_Boat = 0
+Cha_Boat = GetCtrlBoat ( role )
+if Cha_Boat ~= nil then
+SystemNotice( role , "Cannot use while sailing" )
+UseItemFailed ( role )
+return
+end
+local Item_type = GetItemType ( Item )
+local Item_Traget_Type = GetItemType ( Item_Traget )
+local Item_Num = GetItemID ( Item )
+local Check_Exp = 0
+local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+local Item_Target_ID = GetItemID ( Item_Traget )
+local Pet_Slot = GetChaItem ( role , 2 , 1  )
+local Pet_ID = GetItemID ( Pet_Slot )
+ 
+if Item_Target_ID ~= Pet_ID then
+SystemNotice(role , "Pet must be in the Pet Slot" )
+UseItemFailed ( role )
+return
+end
+ 
+  local Item_bg = GetChaItem ( role , 2 , 1  )
+if Item_type == 58 and Item_Traget_Type == 59 then
+Check_Exp = CheckElf_EXP ( role , Item_Traget )
+if Check_Exp == 0 then
+SystemNotice(role , "Growth rate is not full. Unable to feed pet with Improved Accuracy Fruit" )
+UseItemFailed ( role )
+else
+Lvup_Dex_4 ( role , Item_Num , Item_Traget )
+end
+end
+end
+ 
+function ItemUse_Great_Conup ( role , Item , Item_Traget )
+ 
+local ret = CheckJingLingLv2( role , Item_Traget )
+if ret == 0 then
+SystemNotice ( role , "Fairy Lv lower than 42. Unable to use Improved Constitution Fruit")
+UseItemFailed ( role )
+return
+end
+local Cha_Boat = 0
+Cha_Boat = GetCtrlBoat ( role )
+if Cha_Boat ~= nil then
+SystemNotice( role , "Cannot use while sailing" )
+UseItemFailed ( role )
+return
+end
+local Item_type = GetItemType ( Item )
+local Item_Traget_Type = GetItemType ( Item_Traget )
+local Item_Num = GetItemID ( Item )
+local Check_Exp = 0
+local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+local Item_Target_ID = GetItemID ( Item_Traget )
+local Pet_Slot = GetChaItem ( role , 2 , 1  )
+local Pet_ID = GetItemID ( Pet_Slot )
+ 
+if Item_Target_ID ~= Pet_ID then
+SystemNotice(role , "Pet must be in the Pet Slot" )
+UseItemFailed ( role )
+return
+end
+ 
+  local Item_bg = GetChaItem ( role , 2 , 1  )
+if Item_type == 58 and Item_Traget_Type == 59 then
+Check_Exp = CheckElf_EXP ( role , Item_Traget )
+if Check_Exp == 0 then
+SystemNotice(role , "Growth rate is not full. Unable to feed pet with Improved Constitution Fruit" )
+UseItemFailed ( role )
+else
+Lvup_Con_4 ( role , Item_Num , Item_Traget )
+end
+end
+end
+ 
+function ItemUse_Great_Staup ( role , Item , Item_Traget )
+local ret = CheckJingLingLv2( role , Item_Traget )
+if ret == 0 then
+SystemNotice ( role , "Fairy Lv lower than 42. Unable to use Improved Spirit Fruit")
+UseItemFailed ( role )
+return
+end
+local Cha_Boat = 0
+Cha_Boat = GetCtrlBoat ( role )
+if Cha_Boat ~= nil then
+SystemNotice( role , "Cannot use while sailing" )
+UseItemFailed ( role )
+return
+end
+local Item_type = GetItemType ( Item )
+local Item_Traget_Type = GetItemType ( Item_Traget )
+local Item_Num = GetItemID ( Item )
+local Check_Exp = 0
+local Elf_MaxEXP = GetItemAttr(Item_Traget,ITEMATTR_MAXENERGY)
+local Item_Target_ID = GetItemID ( Item_Traget )
+local Pet_Slot = GetChaItem ( role , 2 , 1  )
+local Pet_ID = GetItemID ( Pet_Slot )
+ 
+if Item_Target_ID ~= Pet_ID then
+SystemNotice(role , "Pet must be in the Pet Slot" )
+UseItemFailed ( role )
+return
+end
+ 
+  local Item_bg = GetChaItem ( role , 2 , 1  )  
+if Item_type == 58 and Item_Traget_Type == 59 then
+Check_Exp = CheckElf_EXP ( role , Item_Traget )
+if Check_Exp == 0 then
+SystemNotice(role , "Growth rate is not full. Unable to feed pet with Improved Spirit Fruit" )
+UseItemFailed ( role )
+else
+Lvup_Sta_4 ( role , Item_Num , Item_Traget )
+end
+end
+end

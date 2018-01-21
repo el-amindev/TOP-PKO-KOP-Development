@@ -1,0 +1,40 @@
+add this anywhere in exp_and_level.lua
+
+function ExpToNextLevel(cha,a)
+local LevelJumpToPrevent = 1
+local ExpNeed = DEXP[Lv(cha) + LevelJumpToPrevent]
+local ChaExp = GetChaAttr ( cha , ATTR_CEXP )
+local ExpReq = ExpNeed - ChaExp
+if a > ExpReq then
+return ExpReq
+else
+return a
+end
+end
+
+LevelJumpToPrevent is the amount of jumps to prevent, while having it as 1 it will only level him one level i.e from 75 to 76, if you change it to 2 it will level him from 75 to 77.
+then you find
+
+exp = exp + exp_up
+SetChaAttrI ( TurnToCha(t[i]) , ATTR_CEXP, exp )
+LG("exp" , "exp_now = " , exp )
+
+once u found it, add this
+
+local PreventJumpLevel = 75
+if lvPerson >= PreventJumpLevel then
+exp_up = ExpToNextLevel(TurnToCha(t[i]),exp_up)
+end
+
+it will look like this
+
+local PreventJumpLevel = 75
+if lvPerson >= PreventJumpLevel then
+exp_up = ExpToNextLevel(TurnToCha(t[i]),exp_up)
+end
+exp = exp + exp_up
+SetChaAttrI ( TurnToCha(t[i]) , ATTR_CEXP, exp )
+LG("exp" , "exp_now = " , exp )
+
+PreventJumpLevel is the level to start preventing jumps from.
+and you are done.

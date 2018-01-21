@@ -1,0 +1,16 @@
+----------------------
+-- Installing Guide --
+----------------------
+
+-- Put this script in your cha_timer in function.lua
+
+-- Server Time Scripts Made by Sultan pkoDev
+	if math.mod(now_tick, 360) == 0 and now_tick > 0 then	-- Every 5 minutes, will give notice for Server Time.
+	local now_hour= os.date("%H")		-- Hour Scripts
+	local now_miniute= os.date("%M")	-- Minute Scripts
+	local now_scend=  os.date("%S")		-- Secs Scripts
+	now_hour= tonumber(now_hour)		-- Applying Hour
+	now_miniute= tonumber(now_miniute)	-- Applying Minute
+	now_scend= tonumber(now_scend)		-- Applying Secs
+	SystemNotice ( role, "Current Server Time: "..now_hour..":"..now_miniute..":"..now_scend.."")
+end

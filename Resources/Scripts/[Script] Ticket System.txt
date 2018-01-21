@@ -1,0 +1,100 @@
+
+Tickets = {}
+Tickets[332] = "Spring Town"
+Tickets[563] = "Summer Island"
+Tickets[583] = "Autumn Island"
+Tickets[2445] = "Caribbean"
+Tickets[2446] = "Skeletar Isle"
+Tickets[2447] = "Skeletar Isle"
+Tickets[2491] = "Naval Isle"
+Tickets[2844] = "Abaddon 4"
+Tickets[2883] = "Christmas Village"
+Tickets[3048] = "Thundoria Castle"
+Tickets[3049] = "Thundoria Harbor"
+Tickets[3050] = "Sacred Snow Mountain"
+Tickets[3051] = "Andes Forest Haven"
+Tickets[3052] = "Oasis Haven"
+Tickets[3053] = "Icespire Haven"
+Tickets[3054] = "Lone Tower Entrance"
+Tickets[3055] = "Barren Cavern Entrance"
+Tickets[3056] = "Abandon Mine 2"
+Tickets[3057] = "Silver Mine 2"
+Tickets[3058] = "Silver Mine 3"
+Tickets[3059] = "Lone Tower 2"
+Tickets[3060] = "Lone Tower 3"
+Tickets[3070] = "Lone Tower 4"
+Tickets[3071] = "Lone Tower 5"
+Tickets[3072] = "Lone Tower 6"
+Tickets[3073] = "Abandon Mine 1"
+Tickets[3076] = "Spring Town"
+Tickets[3141] = ""
+Tickets[3142] = ""
+Tickets[3828] = "Thundoria Castle"
+Tickets[3829] = "Thundoria Harbor"
+Tickets[3830] = "Sacred Snow Mountain"
+Tickets[3831] = "Andes Forest Haven"
+Tickets[3832] = "Oasis Haven"
+Tickets[3833] = "Icespire Haven"
+Tickets[3834] = "Lone Tower Entrance"
+Tickets[3835] = "Barren Cavern Entrance"
+Tickets[3836] = "Abandon Mine 2"
+Tickets[3837] = "Silver Mine 2"
+Tickets[3838] = "Silver Mine 3"
+Tickets[3839] = "Lone Tower 2"
+Tickets[3840] = "Lone Tower 3"
+Tickets[3841] = "Lone Tower 4"
+Tickets[3842] = "Lone Tower 5"
+Tickets[3843] = "Lone Tower 6"
+Tickets[3847] = "Abandon Mine 1"
+Tickets[4602] = "Argent City"
+Tickets[4603] = "Shaitan City"
+Tickets[4604] = "Icicle Castle"
+Tickets[5619] = "Spring Town"
+Tickets[5620] = "Summer Island"
+Tickets[5621] = "Autumn Island"
+Tickets[5622] = "Caribbean"
+Tickets[5623] = "Abaddon 4"
+Tickets[5624] = "Sacred Snow Mountain"
+Tickets[5625] = "Thundoria Castle"
+Tickets[6205] = "Winter Island"
+Tickets[6398] = "Icespire Haven"
+Tickets[6399] = "Andes Forest Haven"
+Tickets[6400] = "Thundoria Harbor"
+Tickets[6401] = "Sacred Snow Mountain"
+Tickets[6454] = "Abandon Mine 1"
+Tickets[6455] = "Caribbean"
+Tickets[7543] = "Astral Isle"
+Tickets[7656] = "Demonic Dimension Entrance"
+Tickets[8929] = "Black Dragon Lair 4 Entrance"
+
+Tickets_ProhibitedMap = {}
+Tickets_ProhibitedMap[1] = "garner2"
+Tickets_ProhibitedMap[2] = "prisonisland"
+
+function Ticket(role, Item)
+	local ItemID = GetItemID(Item)
+	if (Hp(role) < Mxhp(role) * 0.5) or (Sp(role) < Mxsp(role) * 0.5) then 
+		SystemNotice(role, "You need to have at least half of your max HP and SP to teleport.")
+		UseItemFailed(role)
+		return
+	end
+	if ChaIsBoat(role) == 1 then
+		SystemNotice(role, "Cannot use while sailing!")
+		UseItemFailed(role)
+		return
+	end
+	for j = 1, table.getn(Tickets_ProhibitedMap) do
+		if GetChaMapName(role) == Tickets_ProhibitedMap[j] then
+			SystemNotice(role, "Cannot use a ticket inside this map.")
+			UseItemFailed(role)
+			return
+		end
+	end
+	k = DelBagItem(role, ItemID, 1)
+	if k == 1 then
+		MoveCity(role, Tickets[ItemID])
+	else
+		UseItemFailed(role)
+		return
+	end
+end

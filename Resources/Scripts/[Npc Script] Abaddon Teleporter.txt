@@ -1,0 +1,74 @@
+199	Abbandon Teleporter	1	260	7	233400,289900	233400,289900	270	Argent City	1	0	abby_tele	0
+
+
+
+function abby_tele ()
+
+	local ReSelectTalk = "I need to reconsider"
+	local ReSelectPage = 1
+
+	--cancel talk
+	local CancelSelectTalk = "Forget it, I will stay here"
+	local CancelSelectPage = 2
+
+	--maps
+	local CurMapName1 = "hell"	
+	local CurMapName2 = "hell3"
+	local CurMapName3 = "hell4"
+	local CurMapName4 = "hell5"
+
+
+	--Abbandon 5
+	local GoTo01X = 100
+	local GoTo01Y = 33
+	local GoTo01M = CurMapName1
+
+	--Abbandon Haven
+	local GoTo02X = 191
+	local GoTo02Y = 178
+	local GoTo02M = CurMapName2
+
+	--Abbandon 18
+	local GoTo03X = 57
+	local GoTo03Y = 90
+	local GoTo03M = CurMapName3
+
+	--Eternal Abbandon
+	local GoTo04X = 20
+	local GoTo04Y = 79
+	local GoTo04M = CurMapName4
+
+	
+	        Talk( 1, "Hi, Im the Abbandon teleporter, what can i do for you?" )
+                Text( 1, "Go Abbandon 5", JumpPage, 2 )
+                Text( 1, "Go Abbandon Haven", JumpPage, 3 )
+	        Text( 1, "Go Abbandon 18", JumpPage, 4 )
+                Text( 1, "Go Eternal Abbandon", JumpPage, 5 )
+                
+	        InitTrigger()
+	        TriggerAction( 2,  GoTo, GoTo01X, GoTo01Y, GoTo01M )
+		Talk( 2, "Abbandon 5-8" )
+	        Text( 2, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2)
+                Text( 2, "I Have Changed My Mind", JumpPage, 1 )
+
+	        InitTrigger()
+	        TriggerAction( 2,  GoTo, GoTo02X, GoTo02Y, GoTo02M )
+	        Talk( 3, "Abbadon Haven" )
+                Text( 3, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2)
+	        Text( 3, "I Have Changed My Mind", JumpPage, 1 )
+
+
+		InitTrigger()
+		TriggerAction( 2,  GoTo, GoTo03X, GoTo03Y, GoTo03M )
+		Talk( 4, "Abbandon 18" )
+		Text( 4, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2 )
+		Text( 4, "I Have Changed My Mind", JumpPage, 1 )
+
+		InitTrigger()
+		TriggerAction( 2,  GoTo, GoTo04X, GoTo04Y, GoTo04M )
+		Talk( 5, "Eternal Abbandon" )
+		Text( 5, "Teleport Me Now",MultiTrigger, GetMultiTrigger(), 2 )
+		Text( 5, "I Have Changed My Mind", JumpPage, 1 )
+
+		
+end

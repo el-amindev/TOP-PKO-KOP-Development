@@ -1,0 +1,61 @@
+--** Place This part anywhere in the exp_and_level.lua (outside a function)
+Print("loading: Level jump fix by: Amu@LegendaryPirates")
+function LJ_AddExp( role , percent )
+
+	local lv_role = GetChaAttr (role , ATTR_LV)
+	local lv_next = lv_role + 1
+	local exp_up = GetExp[lv_next] - GetExp[lv_role]
+	local exp_add = math.floor ( exp_up * percent / 100 )
+	local now_exp = GetChaAttr ( role , ATTR_CEXP )
+	local new_exp = now_exp + exp_add
+	return new_exp 
+
+end
+
+
+--** Go to exp_and_level.lua and find "ShareTeamExp".Scroll down near end till you see "SetChaAttrI ( TurnToCha(t[i]) , ATTR_CEXP, exp )"
+Copy the following below and REPLACE it with "SetChaAttrI ( TurnToCha(t[i]) , ATTR_CEXP, exp )"
+--[[------------------------------------------------------------------------
+--Level Jump Fix By: Amu	Legendaray Pirates Online	      Begin-
+------------------------------------------------------------------------]]--
+
+			--[ Extra DEXP table ]--
+			DEXP[101]	=	4298033895
+			DEXP[102]	=	4420368350
+			DEXP[103]	=	4543712906
+
+			--[ Function ]--
+			local cha = TurnToCha(t[i])
+			local chaName = GetChaDefaultName(cha) 
+			local Lv = Lv(cha)
+
+			LJ_Exp ={}
+			LJ_Exp[chaName] = 0
+
+			-- Removed exp for Max Level characters.
+			if Lv >= LV_LIMIT then
+				exp = 0
+				--SystemNotice(cha,"No exp")
+			end
+
+			-- If total exp player receives is greater
+			if exp >= DEXP[Lv+2] then
+				cha = TurnToCha(t[i])
+				chaName = GetChaDefaultName(cha) 
+				local rand = math.random (80,100)
+				LJ_Exp[chaName] = LJ_AddExp(cha , rand )
+				--SystemNotice(cha,"Custom EXP Gained: ")
+			else
+				if LJ_Exp[chaName] == 0 then
+					cha = TurnToCha(t[i])
+					chaName = GetChaDefaultName(cha) 
+					LJ_Exp[chaName] = exp
+					--SystemNotice(cha,"Normal EXP Gained: ")
+				end
+
+			end
+
+			SetChaAttrI ( cha , ATTR_CEXP, LJ_Exp[chaName] )
+--[[------------------------------------------------------------------------
+--Level Jump Fix By: Amu	Legendaray Pirates Online		End-
+------------------------------------------------------------------------]]--

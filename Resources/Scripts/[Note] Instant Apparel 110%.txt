@@ -1,0 +1,107 @@
+function ItemUse_FusionNote(role,Item)
+
+local FuseItem = GetChaItem ( role , 2 , 0 )
+local FuseTo = GetChaItem ( role , 2 , 1 )
+local FuseItemLevelID = GetItemAttr ( FuseItem , ITEMATTR_VAL_FUSIONID )
+local FuseItemLevel = 15 -- 110%
+local maxure = GetItemAttr ( FuseItem , ITEMATTR_MAXURE )
+local maxforge = GetItemAttr ( FuseItem , ITEMATTR_MAXFORGE )
+local maxenergy = GetItemAttr ( FuseItem , ITEMATTR_MAXENERGY )
+local ure = GetItemAttr ( FuseItem , ITEMATTR_URE )
+local forge = GetItemAttr ( FuseItem , ITEMATTR_FORGE )
+local energy = GetItemAttr ( FuseItem , ITEMATTR_ENERGY )
+local def = GetItemAttr ( FuseItem , ITEMATTR_VAL_DEF )
+local pr = GetItemAttr ( FuseItem , ITEMATTR_VAL_PDEF )
+local dodge = GetItemAttr ( FuseItem , ITEMATTR_VAL_FLEE )
+local hr = GetItemAttr ( FuseItem , ITEMATTR_VAL_HIT )
+local mnatk = GetItemAttr ( FuseItem , ITEMATTR_VAL_MNATK )
+local mxatk = GetItemAttr ( FuseItem , ITEMATTR_VAL_MXATK )
+local FuseItemID = GetItemID(FuseItem)
+local FuseToItemID = GetItemID(FuseTo)
+local FuseItemType = GetItemType2(FuseItemID)
+local FuseToType = GetItemType2(FuseToItemID)
+local HowManyItemHas = CheckBagItem(role,FuseItemID)
+if HowManyItemHas > 1 then
+SystemNotice(role,"You can't have ["..HowManyItemHas.."] of the equipment you want to fuse {"..GetItemName(FuseItemID).."}")
+UseItemFailed(role)
+return 0
+end
+if FuseItemID > 5000 then
+FuseItemID = FuseItemLevelID
+end
+if FuseToItemID < 5000 then
+SystemNotice(role,"Please Insert an apparel")
+UseItemFailed(role)
+return 0
+end
+local ItemType_FuseItem = GetItemType ( FuseItem )
+local ItemType_FuseTo = GetItemType ( FuseTo )
+local star=0
+if ItemType_FuseItem ~= 22 and ItemType_FuseTo ~=27 then
+star = 1
+end
+if ItemType_FuseItem~=27 then
+if ItemType_FuseTo ~= ItemType_FuseItem then
+SystemNotice( role ,"Both equipment type mismatch" )
+UseItemFailed(role)
+return 0
+end
+elseif ItemType_FuseItem==27 and star == 1 then
+SystemNotice( role ,"Both equipment type mismatch" )
+UseItemFailed(role)
+return 0
+end
+local ClassAndType = CheckFusionItem( FuseItem , FuseTo )
+if ClassAndType == LUA_FALSE then
+SystemNotice( role ,"Both equipment type or class requirement does not match" )
+UseItemFailed(role)
+return 0
+end
+if FuseItemType ~= FuseToType then
+SystemNotice(role,"The Equipment does not match the apparel type")
+UseItemFailed(role)
+return 0
+end
+
+SetItemAttr( FuseTo , ITEMATTR_VAL_FUSIONID , FuseItemID )
+SetItemAttr ( FuseTo , ITEMATTR_VAL_LEVEL , FuseItemLevel )
+
+SetItemAttr( FuseTo , ITEMATTR_MAXURE , maxure )
+SetItemAttr ( FuseTo , ITEMATTR_MAXFORGE , maxforge )
+SetItemAttr( FuseTo , ITEMATTR_MAXENERGY , maxenergy )
+SetItemAttr ( FuseTo , ITEMATTR_URE , ure )
+SetItemAttr( FuseTo , ITEMATTR_FORGE , forge )
+SetItemAttr ( FuseTo , ITEMATTR_ENERGY , energy )
+
+SetItemAttr( FuseTo , ITEMATTR_VAL_DEF , def )
+SetItemAttr ( FuseTo , ITEMATTR_VAL_PDEF , pr )
+SetItemAttr( FuseTo , ITEMATTR_VAL_FLEE , dodge )
+SetItemAttr ( FuseTo , ITEMATTR_VAL_HIT , hr )
+
+SetItemAttr( FuseTo , ITEMATTR_VAL_MNATK , mnatk )
+SetItemAttr ( FuseTo , ITEMATTR_VAL_MXATK , mxatk )
+-- Reforge
+local oldparam = GetItemForgeParam(FuseItem, 1)
+local param = GetItemForgeParam(FuseTo, 1)
+local Item_Stone = { }
+local Item_StoneLv = { }
+oldparam = TansferNum(oldparam)
+param = TansferNum(param)
+Sockets = GetNum_Part1(oldparam)
+Item_Stone[0] = GetNum_Part2(oldparam)
+Item_Stone[1] = GetNum_Part4(oldparam)
+Item_Stone[2] = GetNum_Part6(oldparam)
+Item_StoneLv[0] = GetNum_Part3(oldparam)
+Item_StoneLv[1] = GetNum_Part5(oldparam)
+Item_StoneLv[2] = GetNum_Part7(oldparam)
+param = SetNum_Part1(param, Sockets)
+param = SetNum_Part2(param, Item_Stone[0])
+param = SetNum_Part3(param, Item_StoneLv[0])
+param = SetNum_Part4(param, Item_Stone[1])
+param = SetNum_Part5(param, Item_StoneLv[1])
+param = SetNum_Part6(param, Item_Stone[2])
+param = SetNum_Part7(param, Item_StoneLv[2])
+SetItemForgeParam(FuseTo, 1, param)
+RefreshCha(role)
+DelBagItem(role,GetItemID(FuseItem),1)
+end

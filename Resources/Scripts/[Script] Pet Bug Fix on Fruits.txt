@@ -1,0 +1,24 @@
+...
+checks for pet in slot:
+Code:
+
+    local Item_Target_ID = GetItemID ( Item_Traget )
+    local Pet_Slot = GetChaItem ( role , 2 , 1  )
+        local Pet_ID = GetItemID ( Pet_Slot )
+ 
+        if Item_Target_ID ~= Pet_ID then
+            SystemNotice(role , "Pet Must be in The Pet Slot" )
+            UseItemFailed ( role )
+            return
+        end
+
+checks for 2nd slot:
+Code:
+
+local Item_bg = GetChaItem ( role , 2 , 1 )
+if Item_bg ~= nil then
+    SystemNotice(role, "Unable to Feed Fairy on this slot!")
+UseItemFailed ( role )
+
+theres a difference.
+Dont take my words for it, simply throw it in your functions and test it for yourself

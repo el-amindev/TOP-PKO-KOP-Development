@@ -1,0 +1,26 @@
+Gyosa = {}
+ 
+ 
+function ItemUse_SSSJ ( role , Item )
+    local name = GetChaDefaultName(role)
+    if Gyosa[name] == nil then
+        Gyosa[name] = { UsedTime = os.time() }
+    end
+ 
+    local cooldown = Gyosa[name].UsedTime - os.time()
+        if cooldown > 0 then
+        SystemNotice(role,"Gyoza cooldown on effect wait "..cooldown.." second(s) to use again!")
+            UseItemFailed(role)
+            return
+        end
+ 
+    mxhp = GetChaAttr(role,ATTR_MXHP)
+    hp_resume = mxhp * 0.3
+    hp = hp + hp_resume
+ 
+    if hp > mxhp then
+        hp = mxhp
+    end
+    SetCharaAttr(hp, role, ATTR_HP)
+    Gyosa[name].UsedTime = os.time()+10
+end

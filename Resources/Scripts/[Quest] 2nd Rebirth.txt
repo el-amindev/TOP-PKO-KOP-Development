@@ -1,0 +1,484 @@
+ ---Part I Mission---
+ 
+ DefineMission (6214, "Revival I", 1266) 
+ MisBeginTalk ( "<t>I am really touched by your bravery and courage. If you can succeed in rescuing my saint fighters, I am willing to give you the position of the pope as well as our talisman <rReviving Stone.> It's said that the stone is able to grant its holder the power of a deity. The first rune can be found from the Despair Knight - Saro, The guardian of Abaddon 5, who is the embodiment of Aries--Mu (59, 51). Go for it! Athena and I will pray for you! ") 
+ MisBeginCondition (NoMission, 1266) 
+ MisBeginCondition (NoRecord, 1266) 
+ MisBeginCondition (Checksailexpmore, 9000) 
+ MisBeginAction (AddMission, 1266) 
+ MisBeginAction (AddTrigger, 12661, TE_GETITEM, 5753, 1) 
+ MisBeginAction (AddTrigger, 12662, TE_GETITEM, 5754, 1) 
+ MisBeginAction (AddTrigger, 12663, TE_GETITEM, 5755, 1) 
+ MisBeginAction (AddTrigger, 12664, TE_GETITEM, 5756, 1) 
+ MisBeginAction (AddTrigger, 12665, TE_GETITEM, 5757, 1) 
+ MisBeginAction (AddTrigger, 12666, TE_GETITEM, 5758, 1) 
+ 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_DESP, "You have entered Abaddon 5 to Abaddon 11 to rescue the saint fighters and gained the  6 Sait  Fighter's Runes.") 
+ MisNeed (MIS_NEED_ITEM, 5753, 1, 10, 1) 
+ MisNeed (MIS_NEED_ITEM, 5754, 1, 15, 1) 
+ MisNeed (MIS_NEED_ITEM, 5755, 1, 20, 1) 
+ MisNeed (MIS_NEED_ITEM, 5756, 1, 25, 1) 
+ MisNeed (MIS_NEED_ITEM, 5757, 1, 30, 1) 
+ MisNeed (MIS_NEED_ITEM, 5758, 1, 35, 1) 
+ 
+ MisHelpTalk ( "<t>The first rune can be found from the Despair Knight - Saro, The guardian of Abaddon 5, who is the embodiment of Aries--Mu (59, 51). Go for it! Athena and I will pray for you! ") 
+ MisResultTalk ( "<t>You are really brave! Go ahead to the deeper part of Abaddon to rescue the other 6 saint fighters. I am counting on you. ") 
+
+ MisResultCondition (HasMission, 1266) 
+ MisResultCondition (NoRecord, 1266) 
+ MisResultCondition (HasItem, 5753, 1) 
+ MisResultCondition (HasItem, 5754, 1) 
+ MisResultCondition (HasItem, 5755, 1) 
+ MisResultCondition (HasItem, 5756, 1) 
+ MisResultCondition (HasItem, 5757, 1) 
+ MisResultCondition (HasItem, 5758, 1) 
+ 
+ MisResultAction (TakeItem, 5753, 1) 
+ MisResultAction (TakeItem, 5754, 1) 
+ MisResultAction (TakeItem, 5755, 1) 
+ MisResultAction (TakeItem, 5756, 1) 
+ MisResultAction (TakeItem, 5757, 1) 
+ MisResultAction (TakeItem, 5758, 1) 
+ 
+ 
+ MisResultAction (ClearMission, 1266) 
+ MisResultAction (SetRecord, 1266) 
+ 
+
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5753) 
+ TriggerAction (1, AddNextFlag, 1266, 10, 1) 
+ RegCurTrigger (12661) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5754) 
+ TriggerAction (1, AddNextFlag, 1266, 15, 1) 
+ RegCurTrigger (12662) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5755) 
+ TriggerAction (1, AddNextFlag, 1266, 20, 1) 
+ RegCurTrigger (12663) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5756) 
+ TriggerAction (1, AddNextFlag, 1266, 25, 1) 
+ RegCurTrigger (12664) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5757) 
+ TriggerAction (1, AddNextFlag, 1266, 30, 1) 
+ RegCurTrigger (12665) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5758) 
+ TriggerAction (1, AddNextFlag, 1266, 35, 1) 
+ RegCurTrigger (12666) 
+ 
+ ---Mu's Rune---
+ 
+ DefineMission (6215, "Mu's Rune", 1267) 
+ MisBeginTalk ( "<t>If only the Despair Knight - Saro can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1267) 
+ MisBeginCondition (NoRecord, 1267) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginAction (AddMission, 1267) 
+ MisBeginAction (AddTrigger, 12671, TE_KILL, 974, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 974, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Mudmonster - Karu, the guardian of Abaddon 6. He is the embodiment of Taurus--Aldebaran (178, 77). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Despair Knight - Saro, release the soul of Mu.") 
+ MisResultCondition (HasFlag, 1267, 10) 
+ MisResultAction (GiveItem, 5753,1,4 )---MU's Rune
+ MisResultCondition (HasMission, 1267) 
+ MisResultAction (ClearMission, 1267) 
+ MisResultAction (SetRecord, 1267) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 974) 
+ TriggerAction (1, AddNextFlag, 1267, 10, 1) 
+ RegCurTrigger (12671) 
+
+ ---Aldebaran's Rune---
+
+ DefineMission (6216, "Aldebaran's Rune", 1268) 
+ MisBeginTalk ( "<t>If only the Abyss Mudmonster - Karu can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1268) 
+ MisBeginCondition (NoRecord, 1268) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginCondition (HasRecord, 1267) 
+ MisBeginAction (AddMission, 1268) 
+ MisBeginAction (AddTrigger, 12681, TE_KILL, 975, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 975, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Prisoner - Aruthur, the guardian of Abaddon 7. He is the embodiment of Gemini--Saga (205, 170). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Mudmonster - Karu, release the soul of Aldebaran.") 
+ MisResultCondition (HasFlag, 1268, 10) 
+ MisResultAction (GiveItem, 5754,1,4 )---ALDEBA's Rune 
+ MisResultCondition (HasMission, 1268) 
+ MisResultAction (ClearMission, 1268) 
+ MisResultAction (SetRecord, 1268) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 975) 
+ TriggerAction (1, AddNextFlag, 1268, 10, 1) 
+ RegCurTrigger (12681) 
+ 
+ ---Saga's Rune---
+
+ DefineMission (6217, "Saga's Rune", 1269) 
+ MisBeginTalk ( "<t>If only the Abyss Prisoner - Aruthur can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1269) 
+ MisBeginCondition (NoRecord, 1269) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginCondition (HasRecord, 1268) 
+ MisBeginAction (AddMission, 1269) 
+ MisBeginAction (AddTrigger, 12691, TE_KILL, 976, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 976, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Demon - Sacriose, the guardian of Abaddon 8. He is the embodiment of Cancer--Death Mask (85, 198). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Prisoner - Aruthur, release the soul of Saga.") 
+ MisResultCondition (HasFlag, 1269, 10) 
+ MisResultAction (GiveItem, 5755,1,4 )---ALDEBA's Rune
+ MisResultCondition (HasMission, 1269) 
+ MisResultAction (ClearMission, 1269) 
+ MisResultAction (SetRecord, 1269) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 976) 
+ TriggerAction (1, AddNextFlag, 1269, 10, 1) 
+ RegCurTrigger (12691) 
+ 
+ ---Death Mask's Rune---
+
+ DefineMission (6218, "Death Mask's Rune", 1270) 
+ MisBeginTalk ( "<t>If only the Abyss Demon - Sacrios can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1270) 
+ MisBeginCondition (NoRecord, 1270) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginCondition (HasRecord, 1269) 
+ MisBeginAction (AddMission, 1270) 
+ MisBeginAction (AddTrigger, 12701, TE_KILL, 977, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 977, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Phantom Baron, the guardian of Abaddon 10. He is the embodiment of Leo--Aeolia (80, 190). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Demon - Sacrios, release the soul of Death Mask.") 
+ MisResultCondition (HasFlag, 1270, 10) 
+ MisResultAction (GiveItem, 5756,1,4 )---DEATH's Rune
+ MisResultCondition (HasMission, 1270) 
+ MisResultAction (ClearMission, 1270) 
+ MisResultAction (SetRecord, 1270) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 977) 
+ TriggerAction (1, AddNextFlag, 1270, 10, 1) 
+ RegCurTrigger (12701) 
+ 
+ ---Aeolia's Rune---
+
+ DefineMission (6219, "Aeolia's Rune", 1271) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Phantom Baron can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1271) 
+ MisBeginCondition (NoRecord, 1271) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginCondition (HasRecord, 1270) 
+ MisBeginAction (AddMission, 1271) 
+ MisBeginAction (AddTrigger, 12711, TE_KILL, 979, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 979, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Demon Flame, the guardian of Abaddon 11. He is the embodiment of Virgo--Shaka (79, 78). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Phantom Baron, release the soul of Aeolia.") 
+ MisResultCondition (HasFlag, 1271, 10) 
+ MisResultAction (GiveItem, 5757,1,4 )---AIOLIA's Rune
+ MisResultCondition (HasMission, 1271) 
+ MisResultAction (ClearMission, 1271) 
+ MisResultAction (SetRecord, 1271) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 979) 
+ TriggerAction (1, AddNextFlag, 1271, 10, 1) 
+ RegCurTrigger (12711) 
+ 
+ ---Shaka's Rune---
+
+ DefineMission (6220, "Shaka's Rune", 1272) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Demon Flame can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1272) 
+ MisBeginCondition (NoRecord, 1272) 
+ MisBeginCondition (HasMission, 1266) 
+ MisBeginCondition (HasRecord, 1271) 
+ MisBeginAction (AddMission, 1272) 
+ MisBeginAction (AddTrigger, 12721, TE_KILL, 980, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 980, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. Hurry to rescue the Holy Father, Shion (1749, 902) with the rune.") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Demon Flame, release the soul of Shaka.") 
+ MisResultCondition (HasFlag, 1272, 10) 
+ MisResultAction (GiveItem, 5758,1,4 )---SHAKA's Rune 
+ MisResultCondition (HasMission, 1272) 
+ MisResultAction (ClearMission, 1272) 
+ MisResultAction (SetRecord, 1272) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 980) 
+ TriggerAction (1, AddNextFlag, 1272, 10, 1) 
+ RegCurTrigger (12721) 
+ 
+ ---Dohko's Rune---
+
+ DefineMission (6221, "Dohko's Rune", 1273) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Evil Beast can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1273) 
+ MisBeginCondition (NoRecord, 1273) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1272) 
+ MisBeginAction (AddMission, 1273) 
+ MisBeginAction (AddTrigger, 12731, TE_KILL, 981, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 981, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Tyran, the guardian of Abaddon 13. He is the embodiment of Scorpion--Milo (326, 76). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Evil Beast, release the soul of Dohko.") 
+ MisResultCondition (HasFlag, 1273, 10) 
+ MisResultAction (GiveItem, 5759,1,4 )---DOHKO's Rune
+ MisResultCondition (HasMission, 1273) 
+ MisResultAction (ClearMission, 1273) 
+ MisResultAction (SetRecord, 1273) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 981) 
+ TriggerAction (1, AddNextFlag, 1273, 10, 1) 
+ RegCurTrigger (12731) 
+ 
+ ---Milo's Rune---
+
+ DefineMission (6222, "Milo's Rune", 1274) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Tyran can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1274) 
+ MisBeginCondition (NoRecord, 1274) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1273) 
+ MisBeginAction (AddMission, 1274) 
+ MisBeginAction (AddTrigger, 12741, TE_KILL, 982, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 982, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Phoenix, the guardian of Abaddon 14. He is the embodiment of Sagittarius--Aiolos (320, 195). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Tyran, release the soul of Milo.") 
+ MisResultCondition (HasFlag, 1274, 10) 
+ MisResultAction (GiveItem, 5760,1,4 )---MILO's Rune 
+ MisResultCondition (HasMission, 1274) 
+ MisResultAction (ClearMission, 1274) 
+ MisResultAction (SetRecord, 1274) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 982) 
+ TriggerAction (1, AddNextFlag, 1274, 10, 1) 
+ RegCurTrigger (12741) 
+ 
+ ---Aiolos's Rune---
+ 
+ DefineMission (6223, "Aiolos's Rune", 1275) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Phoenix can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1275) 
+ MisBeginCondition (NoRecord, 1275) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1274) 
+ MisBeginAction (AddMission, 1275) 
+ MisBeginAction (AddTrigger, 12751, TE_KILL, 983, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 983, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Despair, the guardian of Abaddon 15. He is the embodiment of Capricorn--Shura (318, 317). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Phoenix, release the soul of Aiolos.") 
+ MisResultCondition (HasFlag, 1275, 10) 
+ MisResultAction (GiveItem, 5761,1,4 )---AIOLOS's Rune 
+ MisResultCondition (HasMission, 1275) 
+ MisResultAction (ClearMission, 1275) 
+ MisResultAction (SetRecord, 1275) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 983) 
+ TriggerAction (1, AddNextFlag, 1275, 10, 1) 
+ RegCurTrigger (12751) 
+ 
+ ---Shura's Rune---
+ 
+ DefineMission (6224, "Shura's Rune", 1276) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Despair can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1276) 
+ MisBeginCondition (NoRecord, 1276) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1275) 
+ MisBeginAction (AddMission, 1276) 
+ MisBeginAction (AddTrigger, 12761, TE_KILL, 984, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 984, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Drakan, the guardian of Abaddon 16. He is the embodiment of Aquarius--Camus (198, 310). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Despair, release the soul of Shura.") 
+ MisResultCondition (HasFlag, 1276, 10) 
+ MisResultAction (GiveItem, 5762,1,4 )---SHURA's Rune 
+ MisResultCondition (HasMission, 1276) 
+ MisResultAction (ClearMission, 1276) 
+ MisResultAction (SetRecord, 1276) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 984) 
+ TriggerAction (1, AddNextFlag, 1276, 10, 1) 
+ RegCurTrigger (12761) 
+ 
+ ---Camus's Rune---
+ 
+ DefineMission (6225, "Camus's Rune", 1277) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Drakan can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1277) 
+ MisBeginCondition (NoRecord, 1277) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1276) 
+ MisBeginAction (AddMission, 1277) 
+ MisBeginAction (AddTrigger, 12771, TE_KILL, 985, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 985, 1, 10, 1) 
+
+ MisResultTalk( "<t>You are really a honorable warrior. This rune is now yours as the reward. The next rune can be found on the Abyss Lord - Tidal, the guardian of Abaddon 17. He is the embodiment of Pisces--Ahrodite (80, 315). Go ahead! I will pray for you! ") 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Drakan, release the soul of Camus.") 
+ MisResultCondition (HasFlag, 1277, 10) 
+ MisResultAction (GiveItem, 5763,1,4 )---ACMUS's Rune 
+ MisResultCondition (HasMission, 1277) 
+ MisResultAction (ClearMission, 1277) 
+ MisResultAction (SetRecord, 1277) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 985) 
+ TriggerAction (1, AddNextFlag, 1277, 10, 1) 
+ RegCurTrigger (12771) 
+ 
+ ---Aphrodite's Rune---
+
+ DefineMission (6226, "Aphrodite's Rune", 1278) 
+ MisBeginTalk ( "<t>If only the Abyss Lord - Tidal can be defeated, then my soul will be released so that I can return to the Holy Land. I believe you are able to defeat him.") 
+ MisBeginCondition (NoMission, 1278) 
+ MisBeginCondition (NoRecord, 1278) 
+ MisBeginCondition (HasMission, 1279) 
+ MisBeginCondition (HasRecord, 1277) 
+ MisBeginAction (AddMission, 1278) 
+ MisBeginAction (AddTrigger, 12781, TE_KILL, 986, 1) 
+ -- MisCancelAction (ClearMission, 1266) 
+
+ MisNeed (MIS_NEED_KILL, 986, 1, 10, 1) 
+
+ MisResultTalk ( "<t>You are really a honorable warrior. This is the last rune, now its yours as the reward for rescuing my 12 sait fighters. Hurry to rescue the Holy Father, Shion (1749, 902) with the rune." ) 
+ MisHelpTalk ( "<t>Defeat the Abyss Lord - Tidal, release the soul of Aphrodite.") 
+ MisResultCondition (HasFlag, 1278, 10) 
+ MisResultAction (GiveItem, 5764,1,4 )---APHRO's Rune
+ MisResultCondition (HasMission, 1278) 
+ MisResultAction (ClearMission, 1278) 
+ MisResultAction (SetRecord, 1278) 
+ MisResultBagNeed (1) 
+ 
+ InitTrigger () 
+ TriggerCondition (1, IsMonster, 986) 
+ TriggerAction (1, AddNextFlag, 1278, 10, 1) 
+ RegCurTrigger (12781) 
+ 
+ ---Part II Mission--
+
+ DefineMission (6227, "Revival II", 1279) 
+ MisBeginTalk ( "<t>I am really touched by your bravery and courage. If you can succeed in rescuing my saint fighters, I am willing to give the position of the pope as well as our talisman <rReviving Stone> to you. It's said that the stone is able to grant its holder the power of a deity. The seventh rune can be found on the Abyss Lord - Evil Beast, the guardian of Abaddon 12, who is the embodiment of Balance Rest--Dohko (210, 80). Go for it! Athena and I will pray for you! ") 
+ MisBeginCondition (NoMission, 1279) 
+ MisBeginCondition (NoRecord, 1279) 
+ MisBeginCondition (HasRecord, 1266) 
+ MisBeginAction (AddMission, 1279) 
+ MisBeginAction (AddTrigger, 12791, TE_GETITEM, 5759, 1) 
+ MisBeginAction (AddTrigger, 12792, TE_GETITEM, 5760, 1) 
+ MisBeginAction (AddTrigger, 12793, TE_GETITEM, 5761, 1) 
+ MisBeginAction (AddTrigger, 12794, TE_GETITEM, 5762, 1) 
+ MisBeginAction (AddTrigger, 12795, TE_GETITEM, 5763, 1) 
+ MisBeginAction (AddTrigger, 12796, TE_GETITEM, 5764, 1) 
+
+ -- MisCancelAction (ClearMission, 1279) 
+
+ MisNeed (MIS_NEED_DESP, "You have entered Abaddon 12 to Abaddon 17 to rescue the saint fighters and gained the last 6 Saint Fighter's Runes. ") 
+ MisNeed (MIS_NEED_ITEM, 5759, 1, 10, 1) 
+ MisNeed (MIS_NEED_ITEM, 5760, 1, 15, 1) 
+ MisNeed (MIS_NEED_ITEM, 5761, 1, 20, 1) 
+ MisNeed (MIS_NEED_ITEM, 5762, 1, 25, 1) 
+ MisNeed (MIS_NEED_ITEM, 5763, 1, 30, 1) 
+ MisNeed (MIS_NEED_ITEM, 5764, 1, 35, 1) 
+ 
+ MisHelpTalk ( "<t>The seventh rune can be found on the Abyss Lord - Evil Beast, the guardian of Abaddon 12, who is the embodiment of Balance Rest--Dohko (210, 80). Go for it! Athena and I will pray for you! ") 
+ MisResultTalk ( "Hurrah!    I have finally found the real pirate king who is eligible to become the pirate pope--you. The talisman    <rReviving Stone> is now yours. You can also claim to raise your attributes great deal. ") 
+
+ MisResultCondition (HasMission, 1279) 
+ MisResultCondition (NoRecord, 1279) 
+ MisResultCondition (HasItem, 5759, 1) 
+ MisResultCondition (HasItem, 5760, 1) 
+ MisResultCondition (HasItem, 5761, 1) 
+ MisResultCondition (HasItem, 5762, 1) 
+ MisResultCondition (HasItem, 5763, 1) 
+ MisResultCondition (HasItem, 5764, 1) 
+ 
+ MisResultAction (TakeItem, 5759, 1) 
+ MisResultAction (TakeItem, 5760, 1) 
+ MisResultAction (TakeItem, 5761, 1) 
+ MisResultAction (TakeItem, 5762, 1) 
+ MisResultAction (TakeItem, 5763, 1) 
+ MisResultAction (TakeItem, 5764, 1) 
+ 
+ 
+ MisResultAction (GiveItem, 5765,1,4 )---Revive Stone 
+ MisResultAction (ClearMission, 1279) 
+ MisResultAction (SetRecord, 1279) 
+ 
+
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5759) 
+ TriggerAction (1, AddNextFlag, 1279, 10, 1) 
+ RegCurTrigger (12791) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5760) 
+ TriggerAction (1, AddNextFlag, 1279, 15, 1) 
+ RegCurTrigger (12792) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5761) 
+ TriggerAction (1, AddNextFlag, 1279, 20, 1) 
+ RegCurTrigger (12793) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5762) 
+ TriggerAction (1, AddNextFlag, 1279, 25, 1) 
+ RegCurTrigger (12794) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5763) 
+ TriggerAction (1, AddNextFlag, 1279, 30, 1) 
+ RegCurTrigger (12795) 
+ InitTrigger () 
+ TriggerCondition (1, IsItem, 5764) 
+ TriggerAction (1, AddNextFlag, 1279, 35, 1) 
+ RegCurTrigger (12796) 
+ 
